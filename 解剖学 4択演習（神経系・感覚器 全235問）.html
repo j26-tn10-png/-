@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>解剖学 4択演習（神経系・感覚器 全235問）</title>
+  <style>
+    :root {
+      --bg: #f1f5f9;
+      --surface: #ffffff;
+      --surface-alt: #f8fafc;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #cbd5e1;
+      --primary: #1d4ed8;
+      --primary-hover: #1e40af;
+      --primary-light: #eff6ff;
+      --teal: #0f766e;
+      --teal-light: #f0fdfa;
+      --indigo: #4338ca;
+      --amber: #b45309;
+      --amber-bg: #fffbeb;
+      --amber-border: #fcd34d;
+      --green: #15803d;
+      --green-bg: #dcfce7;
+      --green-border: #22c55e;
+      --red: #b91c1c;
+      --red-bg: #fee2e2;
+      --red-border: #ef4444;
+      --shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #0f172a;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .header-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .brand-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: #2563eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 17px;
+      flex-shrink: 0;
+    }
+    .brand h1 { font-size: 15px; font-weight: 800; letter-spacing: 0.01em; line-height: 1.25; }
+    .brand p { font-size: 11px; color: #cbd5e1; }
+    .btn-header {
+      background: #1e293b;
+      color: #f1f5f9;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn-header:hover { background: #334155; }
+
+    main {
+      flex: 1;
+      max-width: 780px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 16px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      margin-bottom: 14px;
+    }
+    .hidden { display: none !important; }
+
+    /* Menu Screen */
+    .badge-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px; }
+    .badge-pill {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid #bfdbfe;
+    }
+    .menu-title { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+    .menu-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+
+    .mode-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 560px) {
+      .mode-grid { grid-template-columns: 1fr; }
+    }
+    .mode-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      padding: 14px;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      background: var(--surface);
+      cursor: pointer;
+      transition: transform 0.12s, border-color 0.15s, background 0.15s;
+    }
+    .mode-btn:active { transform: scale(0.99); }
+    .mode-btn.primary { background: var(--primary); border-color: var(--primary); color: #fff; }
+    .mode-btn.primary:hover { background: var(--primary-hover); }
+    .mode-btn.indigo { background: var(--indigo); border-color: var(--indigo); color: #fff; }
+    .mode-btn.indigo:hover { opacity: 0.94; }
+    .mode-btn.nervous:hover { border-color: var(--primary); background: var(--primary-light); }
+    .mode-btn.sensory:hover { border-color: var(--teal); background: var(--teal-light); }
+    .mode-top { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+    .mode-name { font-size: 15px; font-weight: 800; }
+    .mode-count { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 99px; background: rgba(0,0,0,0.12); }
+    .mode-btn:not(.primary):not(.indigo) .mode-count { background: #e2e8f0; color: #334155; }
+    .mode-sub { font-size: 12px; opacity: 0.88; }
+
+    .wrong-bar {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-wrong-review {
+      flex: 1;
+      min-width: 210px;
+      padding: 12px 14px;
+      border-radius: 11px;
+      border: 1.5px solid var(--amber-border);
+      background: var(--amber-bg);
+      color: var(--amber);
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-wrong-review:disabled { opacity: 0.45; cursor: not-allowed; }
+    .btn-wrong-review .pill { background: var(--amber); color: #fff; font-size: 11px; padding: 2px 8px; border-radius: 99px; }
+    .btn-reset {
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-alt);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-reset:hover { color: var(--red); border-color: var(--red-border); }
+
+    /* Search & Jump Box */
+    .tools-title { font-size: 14px; font-weight: 800; margin-bottom: 10px; color: var(--text); }
+    .tool-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+    .tool-input {
+      flex: 1;
+      min-width: 150px;
+      padding: 10px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
+      background: var(--surface-alt);
+    }
+    .tool-input:focus { outline: none; border-color: var(--primary); background: #fff; }
+    .btn-tool {
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: none;
+      background: #0f172a;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-tool:hover { background: #1e293b; }
+    .check-row { display: flex; gap: 18px; flex-wrap: wrap; padding-top: 4px; }
+    .check-label { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--text-muted); cursor: pointer; }
+    .check-label input { width: 16px; height: 16px; accent-color: var(--primary); }
+
+    /* Search Results List */
+    .search-list { max-height: 280px; overflow-y: auto; border: 1px solid var(--border); border-radius: 10px; margin-top: 10px; }
+    .search-item {
+      padding: 10px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      cursor: pointer;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .search-item:last-child { border-bottom: none; }
+    .search-item:hover { background: var(--primary-light); }
+    .search-num { font-weight: 800; color: var(--primary); white-space: nowrap; }
+
+    /* Quiz Screen */
+    .status-top { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 700; margin-bottom: 8px; flex-wrap: wrap; gap: 6px; }
+    .cat-badge { padding: 3px 9px; border-radius: 6px; font-size: 11px; font-weight: 800; }
+    .cat-nervous { background: #dbeafe; color: #1e40af; }
+    .cat-sensory { background: #ccfbf1; color: #115e59; }
+    .progress-track { width: 100%; height: 8px; background: #e2e8f0; border-radius: 99px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.25s ease; }
+
+    .q-meta { font-size: 12px; color: var(--text-muted); font-weight: 700; margin-bottom: 6px; }
+    .q-text { font-size: 16.5px; font-weight: 800; line-height: 1.55; margin-bottom: 16px; white-space: pre-line; }
+
+    .diagram-box {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .diagram-box svg { max-width: 100%; height: auto; max-height: 220px; display: block; margin: 0 auto; }
+    .diagram-caption { font-size: 11px; color: var(--text-muted); margin-top: 6px; font-weight: 600; }
+
+    .options-list { display: flex; flex-direction: column; gap: 10px; }
+    .opt-btn {
+      width: 100%;
+      text-align: left;
+      padding: 14px;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      background: var(--surface);
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: background 0.12s, border-color 0.12s, transform 0.1s;
+    }
+    .opt-btn:hover:not(:disabled) { border-color: #60a5fa; background: #f8fafc; }
+    .opt-btn:active:not(:disabled) { transform: scale(0.99); }
+    .opt-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: #f1f5f9;
+      color: #334155;
+      font-size: 13px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .opt-label { flex: 1; padding-top: 2px; }
+    .opt-mark { font-size: 18px; font-weight: 900; flex-shrink: 0; }
+
+    .opt-btn.correct { border-color: var(--green-border); background: var(--green-bg); color: #052e16; }
+    .opt-btn.correct .opt-num { background: var(--green); color: #fff; }
+    .opt-btn.wrong { border-color: var(--red-border); background: var(--red-bg); color: #450a0a; }
+    .opt-btn.wrong .opt-num { background: var(--red); color: #fff; }
+    .opt-btn.dimmed { opacity: 0.55; }
+
+    /* Explanation Card */
+    .exp-card {
+      border-radius: var(--radius);
+      padding: 16px;
+      border: 2px solid var(--border);
+      margin-bottom: 16px;
+    }
+    .exp-card.is-correct { border-color: var(--green-border); background: #f0fdf4; }
+    .exp-card.is-wrong { border-color: var(--red-border); background: #fef2f2; }
+    .exp-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+    .res-tag { font-size: 12px; font-weight: 800; color: #fff; padding: 3px 9px; border-radius: 6px; }
+    .res-tag.ok { background: var(--green); }
+    .res-tag.ng { background: var(--red); }
+    .corr-str { font-size: 14px; font-weight: 800; }
+    .exp-body {
+      background: rgba(255,255,255,0.88);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 13.5px;
+      color: #1e293b;
+      margin-bottom: 12px;
+    }
+    .btn-next {
+      width: 100%;
+      padding: 14px;
+      border-radius: 11px;
+      border: none;
+      background: #0f172a;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .btn-next:hover { background: #1e293b; }
+
+    /* Result Screen */
+    .result-box { text-align: center; padding: 24px 16px; }
+    .score-panel {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      max-width: 320px;
+      margin: 16px auto;
+    }
+    .score-big { font-size: 40px; font-weight: 900; color: var(--primary); }
+    .score-sub { font-size: 16px; font-weight: 700; color: var(--text-muted); }
+    .result-actions { display: flex; flex-direction: column; gap: 10px; max-width: 360px; margin: 18px auto 0; }
+    .btn-retry-wrong {
+      padding: 13px;
+      border-radius: 11px;
+      border: none;
+      background: #d97706;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .wrong-review-item {
+      padding: 12px;
+      border-radius: 10px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+
+    /* Toast */
+    #toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0f172a;
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      z-index: 50;
+    }
+    #toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand" onclick="goHome()">
+      <div class="brand-icon">解</div>
+      <div>
+        <h1>解剖学 4択演習（神経系・感覚器 全235問）</h1>
+        <p>プリント全23枚 完全収録・試験直前対策アプリ</p>
+      </div>
+    </div>
+    <button id="homeBtn" class="btn-header hidden" onclick="goHome()">メニューへ</button>
+  </div>
+</header>
+
+<main>
+  <!-- 1. トップメニュー -->
+  <section id="menuScreen">
+    <div class="card">
+      <div class="badge-row">
+        <span class="badge-pill">神経系 174問 ＋ 感覚器 61問</span>
+        <span id="totalBadge" style="font-size:12px;font-weight:700;color:#475569;">全235問収録</span>
+      </div>
+      <h2 class="menu-title">学習モードを選択</h2>
+      <p class="menu-desc">
+        過去問プリント全23枚（全235問）を1問ずつ完全網羅。選択肢をタップすると即座に正誤判定と解剖学ポイント解説が表示されます。
+      </p>
+
+      <div class="mode-grid">
+        <button class="mode-btn primary" onclick="startQuiz('all')">
+          <div class="mode-top">
+            <span class="mode-name">全235問 順番通り</span>
+            <span id="cntAll" class="mode-count">235問</span>
+          </div>
+          <span class="mode-sub">No.1〜No.235まで最初から順に演習</span>
+        </button>
+
+        <button class="mode-btn indigo" onclick="startQuiz('random10')">
+          <div class="mode-top">
+            <span class="mode-name">ランダム10問テスト</span>
+            <span class="mode-count">10問</span>
+          </div>
+          <span class="mode-sub">全235問からランダム出題（隙間時間）</span>
+        </button>
+
+        <button class="mode-btn indigo" onclick="startQuiz('random30')">
+          <div class="mode-top">
+            <span class="mode-name">ランダム30問テスト</span>
+            <span class="mode-count">30問</span>
+          </div>
+          <span class="mode-sub">本番形式の実力チェックテスト</span>
+        </button>
+
+        <button class="mode-btn nervous" onclick="startQuiz('nervous')">
+          <div class="mode-top">
+            <span class="mode-name">神経系のみ</span>
+            <span id="cntNervous" class="mode-count">174問</span>
+          </div>
+          <span class="mode-sub">中枢神経・伝導路・脳神経・脊髄神経・自律神経</span>
+        </button>
+
+        <button class="mode-btn sensory" onclick="startQuiz('sensory')">
+          <div class="mode-top">
+            <span class="mode-name">感覚器のみ</span>
+            <span id="cntSensory" class="mode-count">61問</span>
+          </div>
+          <span class="mode-sub">視覚器・聴覚平衡覚器・皮膚・味覚・嗅覚</span>
+        </button>
+      </div>
+
+      <div class="wrong-bar">
+        <button id="reviewWrongBtn" class="btn-wrong-review" onclick="startQuiz('wrong')">
+          <span>間違えた問題だけ復習</span>
+          <span id="wrongBadge" class="pill">0問</span>
+        </button>
+        <button class="btn-reset" onclick="clearWrongHistory()">誤答履歴リセット</button>
+      </div>
+    </div>
+
+    <!-- ジャンプ・検索・設定 -->
+    <div class="card">
+      <div class="tools-title">問題番号ジャンプ ／ キーワード検索</div>
+      <div class="tool-row">
+        <input type="number" id="jumpInput" class="tool-input" min="1" max="235" placeholder="問題番号 (1〜235)">
+        <button class="btn-tool" onclick="jumpToNumber()">この番号から開始</button>
+      </div>
+      <div class="tool-row">
+        <input type="text" id="searchInput" class="tool-input" placeholder="キーワード検索（例：視床、正中神経、コルチ器）" oninput="handleSearch()">
+      </div>
+      <div id="searchResults" class="search-list hidden"></div>
+
+      <div class="check-row" style="margin-top:10px;">
+        <label class="check-label">
+          <input type="checkbox" id="shuffleQ"> 問題順をシャッフル
+        </label>
+        <label class="check-label">
+          <input type="checkbox" id="shuffleOpt"> 選択肢の順番をシャッフル
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. クイズ画面 -->
+  <section id="quizScreen" class="hidden">
+    <div class="card" style="padding:14px 16px;">
+      <div class="status-top">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span id="catBadge" class="cat-badge cat-nervous">神経系</span>
+          <span id="progressText">第 1 / 235 問</span>
+        </div>
+        <div>
+          正答率: <span id="accText" style="color:var(--primary);">0%</span> (<span id="corrText">0</span>問正解)
+        </div>
+      </div>
+      <div class="progress-track">
+        <div id="progressBar" class="progress-fill"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div id="qMeta" class="q-meta">通し番号 No.1（神経系 #1）</div>
+      <div id="qText" class="q-text">問題文</div>
+      <div id="diagramContainer" class="diagram-box hidden"></div>
+      <div id="optionsContainer" class="options-list"></div>
+    </div>
+
+    <div id="expCard" class="exp-card hidden">
+      <div class="exp-header">
+        <span id="resTag" class="res-tag ok">正解！</span>
+        <span id="corrStr" class="corr-str"></span>
+      </div>
+      <div id="expBody" class="exp-body"></div>
+      <button id="nextBtn" class="btn-next" onclick="nextQuestion()">次の問題へ →</button>
+    </div>
+  </section>
+
+  <!-- 3. 結果画面 -->
+  <section id="resultScreen" class="hidden">
+    <div class="card result-box">
+      <span class="badge-pill">演習終了</span>
+      <h2 style="font-size:22px;font-weight:800;margin-top:8px;">テスト結果</h2>
+      <div class="score-panel">
+        <div style="font-size:12px;font-weight:700;color:#64748b;">あなたのスコア</div>
+        <div>
+          <span id="finalCorr" class="score-big">0</span>
+          <span class="score-sub"> / <span id="finalTot">0</span> 問</span>
+        </div>
+        <div style="font-size:15px;font-weight:800;margin-top:4px;">正答率：<span id="finalRate" style="color:var(--primary);">0</span>%</div>
+      </div>
+      <p id="resultMsg" style="font-size:14px;color:#475569;font-weight:600;"></p>
+      <div class="result-actions">
+        <button id="retrySessionBtn" class="btn-retry-wrong hidden" onclick="retrySessionWrong()">今回間違えた問題だけを解き直す</button>
+        <button class="btn-next" onclick="goHome()">トップメニューに戻る</button>
+      </div>
+    </div>
+
+    <div id="wrongReviewCard" class="card hidden">
+      <div class="tools-title" style="color:var(--red);">今回間違えた問題の振り返り</div>
+      <div id="wrongReviewList"></div>
+    </div>
+  </section>
+</main>
+
+<div id="toast"></div>
+
+<script>
+// =========================================================
+// 図解問題用 SVG テンプレート（プリント掲載の8図を再現）
+// =========================================================
+const DIAGRAMS = {
+  caudate: {
+    caption: "脳水平断（MRI/標本）：a=尾状核頭, b=レンズ核(被殻・淡蒼球), c=視床, d=脳梁膨大",
+    svg: `<svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="130" cy="100" rx="108" ry="86" fill="#e2e8f0" stroke="#334155" stroke-width="3"/>
+      <ellipse cx="130" cy="100" rx="94" ry="74" fill="#cbd5e1" stroke="#64748b" stroke-width="1.5"/>
+      <line x1="130" y1="16" x2="130" y2="184" stroke="#475569" stroke-width="2"/>
+      <!-- 側脳室前角 -->
+      <path d="M130,68 Q112,48 104,60 Q116,74 130,78" fill="#1e293b"/>
+      <path d="M130,68 Q148,48 156,60 Q144,74 130,78" fill="#1e293b"/>
+      <!-- 尾状核頭(c) -->
+      <ellipse cx="106" cy="68" rx="7" ry="11" fill="#475569"/>
+      <ellipse cx="154" cy="68" rx="7" ry="11" fill="#475569"/>
+      <!-- レンズ核(b) -->
+      <polygon points="84,84 104,96 86,112" fill="#64748b"/>
+      <polygon points="176,84 156,96 174,112" fill="#64748b"/>
+      <!-- 視床(a) -->
+      <ellipse cx="116" cy="106" rx="11" ry="16" fill="#94a3b8" stroke="#334155"/>
+      <ellipse cx="144" cy="106" rx="11" ry="16" fill="#94a3b8" stroke="#334155"/>
+      <!-- ラベル -->
+      <line x1="114" y1="106" x2="62" y2="136" stroke="#0f172a" stroke-width="1.5"/><text x="48" y="142" font-size="13" font-weight="bold" fill="#0f172a">a</text>
+      <line x1="88" y1="96" x2="48" y2="96" stroke="#0f172a" stroke-width="1.5"/><text x="35" y="100" font-size="13" font-weight="bold" fill="#0f172a">b</text>
+      <line x1="104" y1="66" x2="54" y2="52" stroke="#dc2626" stroke-width="2"/><text x="40" y="55" font-size="14" font-weight="bold" fill="#dc2626">c</text>
+      <line x1="130" y1="136" x2="188" y2="152" stroke="#0f172a" stroke-width="1.5"/><text x="192" y="156" font-size="13" font-weight="bold" fill="#0f172a">d</text>
+    </svg>`
+  },
+  sagittal_thalamus: {
+    caption: "頭部正中矢状断MRI：a=脳梁, b=小脳, c=視床(間脳), d=橋",
+    svg: `<svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
+      <path d="M55,115 C45,60 95,20 155,25 C210,30 225,85 205,135 C195,155 175,165 160,165 L155,190 L125,190 L125,150 L85,145 Z" fill="#cbd5e1" stroke="#334155" stroke-width="2.5"/>
+      <!-- 脳梁(a) -->
+      <path d="M88,82 C100,58 155,58 168,85" fill="none" stroke="#f8fafc" stroke-width="9" stroke-linecap="round"/>
+      <!-- 視床(c) -->
+      <ellipse cx="132" cy="94" rx="18" ry="12" fill="#64748b" stroke="#0f172a" stroke-width="1.5"/>
+      <!-- 橋(d) & 延髄 -->
+      <path d="M122,115 Q110,128 124,142 L126,188 L142,188 L142,115 Z" fill="#94a3b8" stroke="#334155"/>
+      <!-- 小脳(b) -->
+      <ellipse cx="172" cy="132" rx="26" ry="20" fill="#94a3b8" stroke="#334155"/>
+      <!-- ラベル -->
+      <line x1="115" y1="64" x2="72" y2="44" stroke="#0f172a" stroke-width="1.5"/><text x="58" y="46" font-size="13" font-weight="bold">a</text>
+      <line x1="184" y1="132" x2="225" y2="132" stroke="#0f172a" stroke-width="1.5"/><text x="229" y="136" font-size="13" font-weight="bold">b</text>
+      <line x1="132" y1="94" x2="70" y2="104" stroke="#dc2626" stroke-width="2"/><text x="56" y="108" font-size="14" font-weight="bold" fill="#dc2626">c</text>
+      <line x1="120" y1="130" x2="72" y2="152" stroke="#0f172a" stroke-width="1.5"/><text x="58" y="156" font-size="13" font-weight="bold">d</text>
+    </svg>`
+  },
+  coronal_cc: {
+    caption: "大脳前額断：a=脳梁(交連線維), b=内包, c=被殻, d=海馬",
+    svg: `<svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
+      <path d="M130,24 C185,24 225,65 220,115 C216,155 185,178 155,172 C142,168 135,155 130,155 C125,155 118,168 105,172 C75,178 44,155 40,115 C35,65 75,24 130,24 Z" fill="#cbd5e1" stroke="#334155" stroke-width="2.5"/>
+      <line x1="130" y1="24" x2="130" y2="66" stroke="#334155" stroke-width="2"/>
+      <!-- 脳梁(a) -->
+      <rect x="96" y="66" width="68" height="12" rx="5" fill="#f8fafc" stroke="#0f172a" stroke-width="1.5"/>
+      <!-- 側脳室 -->
+      <polygon points="105,78 128,78 128,96" fill="#1e293b"/>
+      <polygon points="155,78 132,78 132,96" fill="#1e293b"/>
+      <!-- 被殻(c) -->
+      <ellipse cx="174" cy="112" rx="10" ry="18" fill="#64748b"/>
+      <ellipse cx="86" cy="112" rx="10" ry="18" fill="#64748b"/>
+      <!-- ラベル -->
+      <line x1="130" y1="70" x2="130" y2="38" stroke="#dc2626" stroke-width="2"/><text x="135" y="42" font-size="14" font-weight="bold" fill="#dc2626">a</text>
+      <line x1="154" y1="108" x2="205" y2="82" stroke="#0f172a" stroke-width="1.5"/><text x="209" y="85" font-size="13" font-weight="bold">b</text>
+      <line x1="176" y1="116" x2="212" y2="116" stroke="#0f172a" stroke-width="1.5"/><text x="216" y="120" font-size="13" font-weight="bold">c</text>
+      <line x1="164" y1="145" x2="205" y2="162" stroke="#0f172a" stroke-width="1.5"/><text x="209" y="166" font-size="13" font-weight="bold">d</text>
+    </svg>`
+  },
+  brachial_plexus: {
+    caption: "腕神経叢の模式図：a=筋皮神経, b=正中神経, c=尺骨神経, d=橈骨神経",
+    svg: `<svg viewBox="0 0 280 180" xmlns="http://www.w3.org/2000/svg">
+      <!-- 神経根 C5-T1 -->
+      <text x="235" y="28" font-size="11" font-weight="bold">C5</text>
+      <text x="235" y="54" font-size="11" font-weight="bold">C6</text>
+      <text x="235" y="84" font-size="11" font-weight="bold">C7</text>
+      <text x="235" y="114" font-size="11" font-weight="bold">C8</text>
+      <text x="235" y="140" font-size="11" font-weight="bold">T1</text>
+      <polyline points="230,24 195,38 140,38 55,32" fill="none" stroke="#334155" stroke-width="3"/>
+      <polyline points="230,50 195,38" fill="none" stroke="#334155" stroke-width="3"/>
+      <polyline points="230,80 140,80 55,148" fill="none" stroke="#334155" stroke-width="3"/>
+      <polyline points="230,110 195,124 140,124 55,112" fill="none" stroke="#334155" stroke-width="3"/>
+      <polyline points="230,136 195,124" fill="none" stroke="#334155" stroke-width="3"/>
+      <!-- M字構造 -->
+      <polyline points="140,38 105,74 55,74" fill="none" stroke="#334155" stroke-width="3"/>
+      <polyline points="140,124 105,74" fill="none" stroke="#334155" stroke-width="3"/>
+      <!-- ラベル -->
+      <circle cx="55" cy="32" r="4" fill="#dc2626"/><text x="36" y="36" font-size="14" font-weight="bold" fill="#dc2626">a</text>
+      <circle cx="55" cy="74" r="4" fill="#0f172a"/><text x="36" y="78" font-size="13" font-weight="bold">b</text>
+      <circle cx="55" cy="112" r="4" fill="#0f172a"/><text x="36" y="116" font-size="13" font-weight="bold">c</text>
+      <circle cx="55" cy="148" r="4" fill="#0f172a"/><text x="36" y="152" font-size="13" font-weight="bold">d</text>
+    </svg>`
+  },
+  wernicke: {
+    caption: "左大脳半球外側面：a=ブローカ野, b=一次運動野, c=一次体性感覚野, d=ウェルニッケ野",
+    svg: `<svg viewBox="0 0 280 185" xmlns="http://www.w3.org/2000/svg">
+      <path d="M40,110 C35,55 85,22 155,25 C215,28 245,68 235,112 C228,138 195,148 165,142 C145,162 105,165 95,140 C65,142 44,128 40,110 Z" fill="#e2e8f0" stroke="#334155" stroke-width="2.5"/>
+      <!-- 中心溝 & 外側溝 -->
+      <path d="M142,25 L130,92" stroke="#334155" stroke-width="2.5"/>
+      <path d="M88,108 L182,88" stroke="#334155" stroke-width="2.5"/>
+      <!-- 部位マーカー -->
+      <circle cx="95" cy="92" r="7" fill="#94a3b8"/>
+      <circle cx="128" cy="56" r="7" fill="#94a3b8"/>
+      <circle cx="152" cy="56" r="7" fill="#94a3b8"/>
+      <circle cx="185" cy="104" r="8" fill="#dc2626"/>
+      <!-- 引き出し線 -->
+      <line x1="95" y1="92" x2="25" y2="92" stroke="#0f172a" stroke-width="1.5"/><text x="12" y="96" font-size="13" font-weight="bold">a</text>
+      <line x1="128" y1="56" x2="112" y2="14" stroke="#0f172a" stroke-width="1.5"/><text x="105" y="13" font-size="13" font-weight="bold">b</text>
+      <line x1="152" y1="56" x2="168" y2="14" stroke="#0f172a" stroke-width="1.5"/><text x="170" y="13" font-size="13" font-weight="bold">c</text>
+      <line x1="185" y1="104" x2="252" y2="118" stroke="#dc2626" stroke-width="2"/><text x="256" y="122" font-size="14" font-weight="bold" fill="#dc2626">d</text>
+    </svg>`
+  },
+  substantia_nigra: {
+    caption: "中脳横断面：矢印＝黒質（ドーパミン作動性ニューロンが線条体［被殻・尾状核］へ投射）",
+    svg: `<svg viewBox="0 0 260 185" xmlns="http://www.w3.org/2000/svg">
+      <path d="M75,45 Q130,30 185,45 L215,95 Q215,135 175,152 L145,125 L115,125 L85,152 Q45,135 45,95 Z" fill="#cbd5e1" stroke="#334155" stroke-width="2.5"/>
+      <!-- 中脳水道 -->
+      <circle cx="130" cy="65" r="6" fill="#0f172a"/>
+      <!-- 赤核 -->
+      <circle cx="110" cy="92" r="11" fill="#94a3b8" stroke="#475569"/>
+      <circle cx="150" cy="92" r="11" fill="#94a3b8" stroke="#475569"/>
+      <!-- 黒質 -->
+      <path d="M78,116 Q102,126 118,118" fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round"/>
+      <path d="M182,116 Q158,126 142,118" fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round"/>
+      <!-- 矢印 -->
+      <line x1="88" y1="142" x2="96" y2="125" stroke="#dc2626" stroke-width="2.5"/>
+      <polygon points="96,125 90,129 97,132" fill="#dc2626"/>
+      <line x1="172" y1="142" x2="164" y2="125" stroke="#dc2626" stroke-width="2.5"/>
+      <polygon points="164,125 163,132 170,129" fill="#dc2626"/>
+      <text x="130" y="172" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f172a">矢印：中脳の黒質</text>
+    </svg>`
+  },
+  cranial_base_hypoglossal: {
+    caption: "頭蓋底内面と脳神経出口：1=視神経管, 2=卵円孔, 3=頚静脈孔, 4=舌下神経管(舌下神経)",
+    svg: `<svg viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="130" cy="95" rx="78" ry="84" fill="#f1f5f9" stroke="#334155" stroke-width="2.5"/>
+      <!-- 大後頭孔 -->
+      <ellipse cx="130" cy="142" rx="18" ry="22" fill="#334155"/>
+      <!-- 孔 -->
+      <circle cx="116" cy="52" r="4" fill="#0f172a"/>
+      <circle cx="104" cy="86" r="4.5" fill="#0f172a"/>
+      <circle cx="102" cy="122" r="5" fill="#0f172a"/>
+      <circle cx="112" cy="142" r="4.5" fill="#dc2626"/>
+      <!-- 引き出し線 -->
+      <line x1="116" y1="52" x2="175" y2="38" stroke="#0f172a" stroke-width="1.5"/><text x="180" y="42" font-size="13" font-weight="bold">1</text>
+      <line x1="104" y1="86" x2="175" y2="80" stroke="#0f172a" stroke-width="1.5"/><text x="180" y="84" font-size="13" font-weight="bold">2</text>
+      <line x1="102" y1="122" x2="175" y2="118" stroke="#0f172a" stroke-width="1.5"/><text x="180" y="122" font-size="13" font-weight="bold">3</text>
+      <line x1="112" y1="142" x2="175" y2="155" stroke="#dc2626" stroke-width="2"/><text x="180" y="159" font-size="14" font-weight="bold" fill="#dc2626">4</text>
+    </svg>`
+  },
+  spinal_cord: {
+    caption: "脊髄横断面：1=後索(意識にのぼる深部感覚), 2=側索, 3=前索, 4=灰白質(後角)",
+    svg: `<svg viewBox="0 0 260 185" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="130" cy="95" rx="76" ry="56" fill="#f8fafc" stroke="#334155" stroke-width="2.5"/>
+      <!-- H型灰白質 -->
+      <path d="M102,62 Q115,82 130,85 Q145,82 158,62 Q165,70 152,95 Q166,120 156,130 Q142,112 130,108 Q118,112 104,130 Q94,120 108,95 Q95,70 102,62 Z" fill="#475569"/>
+      <!-- ラベル -->
+      <line x1="130" y1="62" x2="130" y2="22" stroke="#dc2626" stroke-width="2"/><text x="126" y="18" font-size="14" font-weight="bold" fill="#dc2626">1</text>
+      <line x1="185" y1="95" x2="225" y2="95" stroke="#0f172a" stroke-width="1.5"/><text x="229" y="99" font-size="13" font-weight="bold">2</text>
+      <line x1="130" y1="136" x2="130" y2="170" stroke="#0f172a" stroke-width="1.5"/><text x="126" y="182" font-size="13" font-weight="bold">3</text>
+      <line x1="104" y1="88" x2="36" y2="88" stroke="#0f172a" stroke-width="1.5"/><text x="23" y="92" font-size="13" font-weight="bold">4</text>
+    </svg>`
+  }
+};
+
+// =========================================================
+// 全235問データベース（神経系 No.1〜174 ＋ 感覚器 No.175〜235）
+// =========================================================
+const ALL_QUESTIONS = [
+  // ================= 神経系 No.1〜174 =================
+  {id:1,cat:"nervous",src:"神経系 No.1",q:"誤っているのはどれか。",opts:["自律神経系の中枢は終脳である。","中枢神経は脳と脊髄である。","クモ膜は硬膜と軟膜との間にある髄膜である。","錐体路は随意運動の伝導路である。"],ans:0,exp:"自律神経系の最高中枢は間脳の「視床下部」です（終脳＝大脳ではない）。"},
+  {id:2,cat:"nervous",src:"神経系 No.2",q:"大脳半球について誤っている組合せはどれか。",opts:["運動中枢 ――― 中心前回","知覚中枢 ――― 中心後回","運動性言語中枢 ――― 横側頭回","視覚中枢 ――― 鳥距溝周辺"],ans:2,exp:"運動性言語中枢（ブローカ中枢）は前頭葉にあります。横側頭回は聴覚中枢です。"},
+  {id:3,cat:"nervous",src:"神経系 No.3",q:"誤っているのはどれか。",opts:["表情筋は顔面神経支配である。","咀嚼筋は三叉神経支配である。","胸鎖乳突筋は副神経支配である。","広頸筋は舌下神経支配である。"],ans:3,exp:"広頸筋は表情筋の仲間であり顔面神経支配です。舌下神経は舌の運動を支配します。"},
+  {id:4,cat:"nervous",src:"神経系 No.4",q:"脊髄神経について誤っているのはどれか。",opts:["頸神経は7対ある。","胸神経は12対ある。","腰神経は5対ある。","仙骨神経は5対ある。"],ans:0,exp:"頸椎は7個ですが、頸神経は「8対（C1〜C8）」あります。全部で31対です。"},
+  {id:5,cat:"nervous",src:"神経系 No.5",q:"正しいのはどれか。",opts:["脊髄の前根は知覚性、後根は運動性の線維である。","脊髄神経の前枝は後枝に比べ支配領域が狭い。","横隔神経は頸神経叢から出る。","坐骨神経は腰神経叢から出る。"],ans:2,exp:"横隔神経（C3〜C5）は頸神経叢の枝です。前根は運動性、後根は知覚性、坐骨神経は仙骨神経叢から出ます。"},
+  {id:6,cat:"nervous",src:"神経系 No.6",q:"正しいのはどれか。",opts:["小脳は上方で終脳に続く。","間脳は上方で小脳に続く。","橋は下方で中脳に続く。","延髄は下方で脊髄に続く。"],ans:3,exp:"延髄は大後頭孔を通り下方で脊髄に続きます。脳幹は上から中脳・橋・延髄の順です。"},
+  {id:7,cat:"nervous",src:"神経系 No.7",q:"誤っているのはどれか。",opts:["橈骨神経麻痺は下垂手になる。","脳神経は末梢神経である。","脊髄前根は感覚性線維である。","大脳皮質には神経細胞が集合している。"],ans:2,exp:"脊髄前根は運動性（遠心性）線維のみを通します。感覚性線維を通すのは後根です。"},
+  {id:8,cat:"nervous",src:"神経系 No.8",q:"正しいのはどれか。",opts:["動眼神経は感覚性線維が主である。","三叉神経は副交感性線維を含む。","顔面神経は運動性線維が主である。","迷走神経は交感性線維を含む。"],ans:2,exp:"顔面神経は表情筋を動かす運動性線維が主です。副交感線維を含むのは3・7・9・10のみです。"},
+  {id:9,cat:"nervous",src:"神経系 No.9",q:"神経系について誤っているのはどれか。",opts:["運動神経は骨格筋に分布する。","錐体路は随意運動の伝導路である。","脳神経は中枢神経である。","脊髄神経は末梢神経である。"],ans:2,exp:"中枢神経は脳と脊髄のみ。脳神経（12対）と脊髄神経（31対）はすべて末梢神経です。"},
+  {id:10,cat:"nervous",src:"神経系 No.10",q:"脳幹に含まれないのはどれか。",opts:["延髄","中脳","橋","嗅脳"],ans:3,exp:"脳幹は「中脳・橋・延髄」の3つです。嗅脳は終脳の一部であり脳幹には含まれません。"},
+  {id:11,cat:"nervous",src:"神経系 No.11",q:"脳神経について誤っているのはどれか。",opts:["動眼神経は運動性である。","内耳神経は感覚性である。","迷走神経は混合性である。","舌下神経は感覚性である。"],ans:3,exp:"舌下神経は舌筋を動かす運動性の脳神経です。感覚線維は含みません。"},
+  {id:12,cat:"nervous",src:"神経系 No.12",q:"外眼筋を支配しないのはどれか。",opts:["視神経","動眼神経","滑車神経","外転神経"],ans:0,exp:"視神経は視覚を伝える感覚神経です。外眼筋は動眼・滑車・外転神経が支配します。"},
+  {id:13,cat:"nervous",src:"神経系 No.13",q:"視覚伝導路の中継核はどれか。",opts:["線状体","台形体","赤核","外側膝状体"],ans:3,exp:"視覚伝導路の中継核は間脳（視床）の「外側膝状体」です（聴覚路は内側膝状体）。"},
+  {id:14,cat:"nervous",src:"神経系 No.14",q:"誤っているのはどれか。",opts:["クモ膜は硬膜と軟膜との間にある。","脳室の脈絡叢は髄液をつくる。","錐体外路は知覚の伝導路である。","脳神経は末梢神経である。"],ans:2,exp:"錐体外路は不随意運動や筋緊張を調節する運動（下行性）の伝導路です。"},
+  {id:15,cat:"nervous",src:"神経系 No.15",q:"正しいのはどれか。",opts:["副神経は頸神経叢から分枝する。","横隔神経は腕神経叢から分枝する。","坐骨神経は腰神経叢から分枝する。","尺骨神経は腕神経叢から分枝する。"],ans:3,exp:"尺骨神経は腕神経叢の枝です。横隔神経は頸神経叢、坐骨神経は仙骨神経叢から出ます。"},
+  {id:16,cat:"nervous",src:"神経系 No.16",q:"顔面神経の支配を受けるのはどれか。",opts:["側頭筋","頬筋","咬筋","外側翼突筋"],ans:1,exp:"頬筋は表情筋の1つなので顔面神経支配です。他の3つは咀嚼筋で三叉神経支配です。"},
+  {id:17,cat:"nervous",src:"神経系 No.17",q:"大脳半球の中心溝はどこにあるか。",opts:["前頭葉と頭頂葉との間","頭頂葉と側頭葉との間","後頭葉と頭頂葉との間","前頭葉と後頭葉との間"],ans:0,exp:"中心溝は前頭葉と頭頂葉の境界です（前頭葉と側頭葉の境界は外側溝）。"},
+  {id:18,cat:"nervous",src:"神経系 No.18",q:"神経系の伝導路について誤っているのはどれか。",opts:["錐体路は下行性である。","視覚路は下行性である。","痛覚路は上行性である。","嗅覚路は上行性である。"],ans:1,exp:"視覚路・痛覚路・嗅覚路などの感覚伝導路はすべて上行性です。"},
+  {id:19,cat:"nervous",src:"神経系 No.19",q:"脊髄神経について誤っているのはどれか。",opts:["頸神経は7対ある。","胸神経は12対ある。","腰神経は5対ある。","仙骨神経は5対ある。"],ans:0,exp:"頸神経は8対（C1〜C8）あります。全部で31対です。"},
+  {id:20,cat:"nervous",src:"神経系 No.20",q:"正中神経と尺骨神経とで支配を受けるのはどれか。",opts:["短母指屈筋","母指内転筋","短母指外転筋","母指対立筋"],ans:0,exp:"短母指屈筋は浅頭が正中神経、深頭が尺骨神経の二重支配を受けます。"},
+  {id:21,cat:"nervous",src:"神経系 No.21",q:"梨状筋下孔を通過するのはどれか。",opts:["上殿神経","大腿神経","閉鎖神経","坐骨神経"],ans:3,exp:"梨状筋下孔を通るのは坐骨神経・下殿神経・陰部神経などです。上殿神経は梨状筋上孔を通ります。"},
+  {id:22,cat:"nervous",src:"神経系 No.22",q:"下行性伝導路はどれか。",opts:["錐体路","後索路","脊髄視床路","脊髄小脳路"],ans:0,exp:"「脊髄〇〇路」はすべて上行性感覚路です。錐体路は随意運動を伝える下行性伝導路です。"},
+  {id:23,cat:"nervous",src:"神経系 No.23",q:"頸神経叢から出る神経はどれか。",opts:["肩甲背神経","肩甲上神経","筋皮神経","鎖骨上神経"],ans:3,exp:"鎖骨上神経は頸神経叢の皮枝です。肩甲背・肩甲上・筋皮神経はすべて腕神経叢から出ます。"},
+  {id:24,cat:"nervous",src:"神経系 No.24",q:"誤っているのはどれか。",opts:["松果体は中脳にある。","甲状腺は頸の前面にある。","副腎は腎臓の上に位置している。","ランゲルハンス島は膵臓にある。"],ans:0,exp:"松果体は「間脳（視床上部）」にあります。中脳ではありません。"},
+  {id:25,cat:"nervous",src:"神経系 No.25",q:"脳神経について誤っているのはどれか。",opts:["外転神経は運動性である。","内耳神経は感覚性である。","副神経は感覚性である。","迷走神経は混合性である。"],ans:2,exp:"副神経（XI）は胸鎖乳突筋と僧帽筋を支配する純粋な「運動性」神経です。"},
+  {id:26,cat:"nervous",src:"神経系 No.26",q:"前頭葉にある中枢はどれか。",opts:["聴覚中枢","視覚中枢","体性感覚中枢","運動性言語中枢"],ans:3,exp:"運動性言語中枢（ブローカ中枢）は前頭葉にあります。聴覚＝側頭葉、視覚＝後頭葉、体性感覚＝頭頂葉。"},
+  {id:27,cat:"nervous",src:"神経系 No.27",q:"仙骨神経叢から出る神経はどれか。",opts:["閉鎖神経","坐骨神経","大腿神経","陰部大腿神経"],ans:1,exp:"坐骨神経は仙骨神経叢（L4〜S3）から出ます。閉鎖・大腿・陰部大腿神経は腰神経叢の枝です。"},
+  {id:28,cat:"nervous",src:"神経系 No.28",q:"筋とその支配神経との組合せで正しいのはどれか。",opts:["三角筋 ――― 筋皮神経","上腕三頭筋 ――― 尺骨神経","浅指屈筋 ――― 正中神経","母指内転筋 ――― 橈骨神経"],ans:2,exp:"浅指屈筋は正中神経支配です（三角筋＝腋窩神経、上腕三頭筋＝橈骨神経、母指内転筋＝尺骨神経）。"},
+  {id:29,cat:"nervous",src:"神経系 No.29",q:"斜角筋隙を通過するのはどれか。",opts:["頸神経叢","腕神経叢","腰神経叢","仙骨神経叢"],ans:1,exp:"前斜角筋と中斜角筋の間の斜角筋隙を通過するのは腕神経叢と鎖骨下動脈です。"},
+  {id:30,cat:"nervous",src:"神経系 No.30",q:"大脳の後頭葉にある中枢はどれか。",opts:["体性感覚中枢","味覚中枢","視覚中枢","聴覚中枢"],ans:2,exp:"後頭葉の鳥距溝周辺には「視覚中枢（一次視覚野）」があります。"},
+  {id:31,cat:"nervous",src:"神経系 No.31",q:"下行性伝導路はどれか。",opts:["内側毛帯","脊髄視床路","後索路","皮質脊髄路"],ans:3,exp:"皮質脊髄路（＝錐体路）は随意運動を伝える下行性伝導路です。"},
+  {id:32,cat:"nervous",src:"神経系 No.32",q:"歯の感覚を支配する神経はどれか。",opts:["三叉神経","顔面神経","舌咽神経","舌下神経"],ans:0,exp:"歯の感覚は上顎神経（V2）と下顎神経（V3）、すなわち「三叉神経」が支配します。"},
+  {id:33,cat:"nervous",src:"神経系 No.33",q:"副神経の枝が分布する筋はどれか。",opts:["咬筋","上斜筋","外側直筋","胸鎖乳突筋"],ans:3,exp:"副神経（XI）は胸鎖乳突筋と僧帽筋に分布します（咬筋＝三叉、上斜筋＝滑車、外側直筋＝外転）。"},
+  {id:34,cat:"nervous",src:"神経系 No.34",q:"脊髄神経の後枝はどれか。",opts:["大後頭神経","横隔神経","正中神経","肋間神経"],ans:0,exp:"大後頭神経は第2頸神経（C2）の後枝で、後頭部の皮膚感覚を支配します。"},
+  {id:35,cat:"nervous",src:"神経系 No.35",q:"副神経と頸神経叢によって支配される筋はどれか。",opts:["僧帽筋","広背筋","前鋸筋","大胸筋"],ans:0,exp:"僧帽筋と胸鎖乳突筋は副神経および頸神経叢の枝によって支配されます。"},
+  {id:36,cat:"nervous",src:"神経系 No.36",q:"大脳核（大脳基底核）はどれか。",opts:["薄束核","オリーブ核","歯状核","尾状核"],ans:3,exp:"大脳基底核は尾状核・被殻・淡蒼球（線条体・レンズ核）などです。歯状核は小脳、オリーブ核・薄束核は延髄。"},
+  {id:37,cat:"nervous",src:"神経系 No.37",q:"正しい組合せはどれか。",opts:["大脳 ――― 視床","間脳 ――― 上丘","中脳 ――― 赤核","小脳 ――― 被殻"],ans:2,exp:"赤核・黒質・上丘・下丘・大脳脚は「中脳」にあります。"},
+  {id:38,cat:"nervous",src:"神経系 No.38",q:"脳神経と支配筋との組合せで正しいのはどれか。",opts:["視神経 ――― 毛様体筋","三叉神経 ――― 咀嚼筋","外転神経 ――― 鼓膜張筋","動眼神経 ――― 上斜筋"],ans:1,exp:"咀嚼筋（咬筋・側頭筋・内外側翼突筋）は三叉神経（下顎神経）支配です。"},
+  {id:39,cat:"nervous",src:"神経系 No.39",q:"神経叢と神経との組合せで正しいのはどれか。",opts:["頸神経叢 ――― 横隔神経","腕神経叢 ――― 鎖骨上神経","腰神経叢 ――― 坐骨神経","仙骨神経叢 ――― 閉鎖神経"],ans:0,exp:"横隔神経は頸神経叢の枝です（鎖骨上神経＝頸神経叢、坐骨神経＝仙骨神経叢、閉鎖神経＝腰神経叢）。"},
+  {id:40,cat:"nervous",src:"神経系 No.40",q:"正しい組合せはどれか。",opts:["大腿神経 ――― 大腿二頭筋","上殿神経 ――― 大殿筋","坐骨神経 ――― 大腿筋膜張筋","閉鎖神経 ――― 大内転筋"],ans:3,exp:"閉鎖神経は大腿内側の内転筋群（大内転筋など）を支配します。"},
+  {id:41,cat:"nervous",src:"神経系 No.41",q:"後頭葉にあるのはどれか。",opts:["感覚性言語野","運動性言語野","聴覚野","視覚野"],ans:3,exp:"後頭葉の鳥距溝周辺には「視覚野」があります。"},
+  {id:42,cat:"nervous",src:"神経系 No.42",q:"下行性伝導路はどれか。",opts:["味覚路","錐体外路","視覚路","聴覚路"],ans:1,exp:"錐体外路は運動を調節する下行性伝導路です。他の3つは上行性感覚路です。"},
+  {id:43,cat:"nervous",src:"神経系 No.43",q:"錐体路が通らない脳の部位はどれか。",opts:["脳梁","内包","大脳脚","錐体交叉"],ans:0,exp:"脳梁は左右の大脳半球を結ぶ交連線維であり、錐体路は通りません。"},
+  {id:44,cat:"nervous",src:"神経系 No.44",q:"舌粘膜の感覚に関与しないのはどれか。",opts:["三叉神経","顔面神経","舌咽神経","舌下神経"],ans:3,exp:"舌下神経（XII）は舌筋の運動のみを支配し、感覚・味覚には関与しません。"},
+  {id:45,cat:"nervous",src:"神経系 No.45",q:"上腕の内側で屈筋と伸筋との間を通るのはどれか。",opts:["橈骨神経","腋窩神経","尺骨神経","筋皮神経"],ans:2,exp:"尺骨神経は上腕内側を下行し、内側上顆の後方（肘部管）を通過します。"},
+  {id:46,cat:"nervous",src:"神経系 No.46",q:"交感神経の節前線維を含むのはどれか。",opts:["大内臓神経","胸神経の後根","仙骨神経の前根","迷走神経"],ans:0,exp:"大内臓神経は胸髄側角から出た交感神経の節前線維からなり、腹腔神経節へ向かいます。"},
+  {id:47,cat:"nervous",src:"神経系 No.47",q:"脳について正しいのはどれか。",opts:["中心溝は左右の大脳半球の間にある。","外側溝は後頭葉と側頭葉との間にある。","第4脳室は間脳にある。","小脳テントは大脳と小脳との間にある。"],ans:3,exp:"小脳テントは大脳と小脳の間に張る硬膜のヒダです。"},
+  {id:48,cat:"nervous",src:"神経系 No.48",q:"正しい組合せはどれか。",opts:["頭頂葉 ――― 体性感覚野","側頭葉 ――― 運動野","後頭葉 ――― 聴覚野","前頭葉 ――― 視覚野"],ans:0,exp:"頭頂葉の中心後回には体性感覚野があります。"},
+  {id:49,cat:"nervous",src:"神経系 No.49",q:"動作に関与する筋と神経支配との組合せで正しいのはどれか。",opts:["ウインクする ――― 三叉神経","噛む ――― 顔面神経","なめる ――― 舌咽神経","声を出す ――― 迷走神経"],ans:3,exp:"発声に関わる喉頭筋（声帯筋など）は迷走神経（反回神経）が支配します。"},
+  {id:50,cat:"nervous",src:"神経系 No.50",q:"自律神経線維を含まないのはどれか。",opts:["動眼神経","三叉神経","顔面神経","舌咽神経"],ans:1,exp:"副交感線維を含む脳神経は「3・7・9・10」の4つだけ。三叉神経は含みません。"},
+  {id:51,cat:"nervous",src:"神経系 No.51",q:"脊髄神経節にニューロンの細胞体があるのはどれか。",opts:["交感神経","副交感神経","運動神経","感覚神経"],ans:3,exp:"後根の途中の膨らみである脊髄神経節には「感覚神経（偽単極性ニューロン）」の細胞体があります。"},
+  {id:52,cat:"nervous",src:"神経系 No.52",q:"神経とその支配域との組合せで正しいのはどれか。\na. 浅腓骨神経 ― 下腿内側部の皮膚\nb. 深腓骨神経 ― 下腿伸筋群\nc. 脛骨神経 ― 下腿屈筋群\nd. 伏在神経 ― 下腿外側部の皮膚",opts:["a、b","a、d","b、c","c、d"],ans:2,exp:"b（深腓骨神経＝下腿伸筋群）とc（脛骨神経＝下腿屈筋群）が正しい組合せです。伏在神経は下腿内側、浅腓骨神経は下腿外側の皮膚を支配します。"},
+  {id:53,cat:"nervous",src:"神経系 No.53",q:"腺性および神経性の部位からなるのはどれか。",opts:["上皮小体","甲状腺","下垂体","精巣"],ans:2,exp:"下垂体は腺性下垂体（前葉・中間部）と神経性下垂体（後葉）からなります。"},
+  {id:54,cat:"nervous",src:"神経系 No.54",q:"横隔膜の運動を支配するのはどれか。",opts:["頸神経叢","腕神経叢","肋間神経","腰神経叢"],ans:0,exp:"横隔神経（C3〜C5）は頸神経叢から出て横隔膜を支配します。"},
+  {id:55,cat:"nervous",src:"神経系 No.55",q:"大脳皮質の前頭葉に存在しているのはどれか。",opts:["体性感覚野","味覚野","ウェルニッケの中枢","ブローカの中枢"],ans:3,exp:"ブローカの中枢（運動性言語野）は前頭葉にあります。ウェルニッケの中枢は側頭葉です。"},
+  {id:56,cat:"nervous",src:"神経系 No.56",q:"遠心性神経線維のみを通すのはどれか。",opts:["脊髄神経の前枝","脊髄神経の後枝","脊髄神経の前根","脊髄神経の後根"],ans:2,exp:"脊髄神経の「前根」は遠心性（運動性）線維のみを通します（ベル・マジャンディの法則）。"},
+  {id:57,cat:"nervous",src:"神経系 No.57",q:"坐骨神経に支配される筋はどれか。",opts:["大殿筋","中殿筋","大腿筋膜張筋","大腿二頭筋"],ans:3,exp:"坐骨神経は大腿後面のハムストリングス（大腿二頭筋・半腱様筋・半膜様筋）を支配します。"},
+  {id:58,cat:"nervous",src:"神経系 No.58",q:"第三脳室と第四脳室との間にあるのはどれか。",opts:["側脳室","中心管","室間孔","中脳水道"],ans:3,exp:"中脳を貫く「中脳水道」が第3脳室と第4脳室を連絡します。側脳室と第3脳室をつなぐのは室間孔です。"},
+  {id:59,cat:"nervous",src:"神経系 No.59",q:"表層が灰白質で深部に白質があるのはどれか。",opts:["中脳","橋","小脳","延髄"],ans:2,exp:"大脳と小脳は表層（皮質）が灰白質、深部（髄質）が白質になっています。"},
+  {id:60,cat:"nervous",src:"神経系 No.60",q:"交感神経節前線維が多く分布するのはどれか。",opts:["下垂体前葉","下垂体後葉","副腎皮質","副腎髄質"],ans:3,exp:"副腎髄質には交感神経の節前線維が直接分布し、カテコールアミンを分泌させます。"},
+  {id:61,cat:"nervous",src:"神経系 No.61",q:"視床と視床下部とに分けられるのはどれか。",opts:["間脳","大脳半球","中脳","小脳"],ans:0,exp:"間脳は視床と視床下部などに分けられます。"},
+  {id:62,cat:"nervous",src:"神経系 No.62",q:"橋に存在する脳神経核はどれか。",opts:["動眼神経核","三叉神経核","舌咽神経核","舌下神経核"],ans:1,exp:"橋には5〜8番（三叉・外転・顔面・内耳神経核）が存在します。動眼は中脳、舌咽・舌下は延髄。"},
+  {id:63,cat:"nervous",src:"神経系 No.63",q:"錐体外路系に属さないのはどれか。",opts:["線条体","海馬","網様体","黒質"],ans:1,exp:"海馬は大脳辺縁系に属し、記憶形成に関与します。"},
+  {id:64,cat:"nervous",src:"神経系 No.64",q:"脳神経とその機能との組合せで正しいのはどれか。",opts:["三叉神経 ――― 舌の触覚","舌下神経 ――― 舌下腺の分泌調節","顔面神経 ――― 舌の後1/3の味覚","舌咽神経 ――― 舌の運動"],ans:0,exp:"舌前2/3の触覚・痛覚は三叉神経（V3の枝である舌神経）が支配します。"},
+  {id:65,cat:"nervous",src:"神経系 No.65",q:"腕神経叢の枝はどれか。",opts:["横隔神経","腋窩神経","白交通枝","鎖骨上神経"],ans:1,exp:"腋窩神経は腕神経叢の後神経束から出る枝です。横隔神経・鎖骨上神経は頸神経叢。"},
+  {id:66,cat:"nervous",src:"神経系 No.66",q:"神経とその通路との組合せで正しいのはどれか。",opts:["橈骨神経 ――― 外側腋窩隙","尺骨神経 ――― 手根管","大腿神経 ――― 鼠径管","陰部神経 ――― 小坐骨孔"],ans:3,exp:"陰部神経は梨状筋下孔を出たあと「小坐骨孔」を通って会陰部へ入ります（外側腋窩隙＝腋窩神経、手根管＝正中神経、筋裂孔＝大腿神経）。"},
+  {id:67,cat:"nervous",src:"神経系 No.67",q:"脊髄神経の後枝はどれか。",opts:["大後頭神経","鎖骨上神経","大腿神経","坐骨神経"],ans:0,exp:"大後頭神経は第2頸神経後枝です。他の3つは前枝由来です。"},
+  {id:68,cat:"nervous",src:"神経系 No.68",q:"左右の大脳半球を結ぶ線維からなるのはどれか。",opts:["脳梁","脳弓","内包","大脳脚"],ans:0,exp:"脳梁は左右の大脳半球を結ぶ最大の「交連線維」です。"},
+  {id:69,cat:"nervous",src:"神経系 No.69",q:"赤核があるのはどれか。",opts:["終脳","中脳","延髄","小脳"],ans:1,exp:"赤核は中脳被蓋にある錐体外路系の神経核です。"},
+  {id:70,cat:"nervous",src:"神経系 No.70",q:"くも膜下腔に通じるのはどれか。",opts:["側脳室","第3脳室","中脳水道","第4脳室"],ans:3,exp:"第4脳室は正中口（マジャンディ孔）と外側口（ルシュカ孔）によってくも膜下腔へ通じます。"},
+  {id:71,cat:"nervous",src:"神経系 No.71",q:"瞳孔括約筋を支配するのはどれか。",opts:["視神経","動眼神経","眼神経","外転神経"],ans:1,exp:"瞳孔括約筋は動眼神経（III）に含まれる副交感神経線維によって支配され、縮瞳を起こします。"},
+  {id:72,cat:"nervous",src:"神経系 No.72",q:"手根管を通るのはどれか。",opts:["正中神経","尺骨神経","橈骨神経","筋皮神経"],ans:0,exp:"手根管を通過する神経は「正中神経」だけです。尺骨神経は屈筋支帯の浅層（ギヨン管）を通ります。"},
+  {id:73,cat:"nervous",src:"神経系 No.73",q:"正しい組合せはどれか。",opts:["頸神経ワナ ――― 前斜角筋","肋間神経 ――― 腹直筋","腋窩神経 ――― 上腕三頭筋","上殿神経 ――― 大殿筋"],ans:1,exp:"胸神経前枝である肋間神経は腹直筋などの腹壁筋群も支配します。"},
+  {id:74,cat:"nervous",src:"神経系 No.74",q:"中心溝が境界となるのはどれか。",opts:["頭頂葉と後頭葉","後頭葉と側頭葉","頭頂葉と前頭葉","前頭葉と側頭葉"],ans:2,exp:"中心溝は前頭葉と頭頂葉の境界です。"},
+  {id:75,cat:"nervous",src:"神経系 No.75",q:"脳の表面から観察できないのはどれか。",opts:["視交叉","錐体","海馬","オリーブ"],ans:2,exp:"海馬は側脳室下角の底部（内部）に位置するため、脳の外表面からは観察できません。"},
+  {id:76,cat:"nervous",src:"神経系 No.76",q:"中脳に神経核が存在するのはどれか。",opts:["顔面神経","舌下神経","動眼神経","迷走神経"],ans:2,exp:"中脳には動眼神経核（III）と滑車神経核（IV）があります。"},
+  {id:77,cat:"nervous",src:"神経系 No.77",q:"腕神経叢の枝が支配するのはどれか。",opts:["胸鎖乳突筋","大円筋","外肋間筋","横隔膜"],ans:1,exp:"大円筋は腕神経叢の枝である「肩甲下神経」に支配されます（胸鎖乳突筋＝副神経、外肋間筋＝肋間神経、横隔膜＝横隔神経）。"},
+  {id:78,cat:"nervous",src:"神経系 No.78",q:"神経と通過部位との組合せで正しいのはどれか。",opts:["大腿神経 ――― 膝窩部","脛骨神経 ――― 内果の後方","浅腓骨神経 ――― 伸筋支帯の深部","深腓骨神経 ――― 外果の後方"],ans:1,exp:"脛骨神経は内果の後方（足根管）を通過して足底へ至ります（伸筋支帯深部＝深腓骨神経、外果後方＝腓腹神経）。"},
+  {id:79,cat:"nervous",src:"神経系 No.79",q:"大脳皮質運動性言語野（ブローカ中枢）があるのはどこか。",opts:["前頭葉","頭頂葉","側頭葉","後頭葉"],ans:0,exp:"ブローカ中枢は優位半球の前頭葉（下前頭回）にあります。"},
+  {id:80,cat:"nervous",src:"神経系 No.80",q:"錐体交叉があるのはどこか。",opts:["間脳","中脳","橋","延髄"],ans:3,exp:"錐体交叉は延髄下部にあり、錐体路の約80〜90%の線維がここで左右交叉します。"},
+  {id:81,cat:"nervous",src:"神経系 No.81",q:"舌神経を分枝するのはどれか。",opts:["上顎神経","下顎神経","舌咽神経","舌下神経"],ans:1,exp:"舌神経は三叉神経第3枝である「下顎神経（V3）」の枝で、舌前2/3の一般感覚を伝えます。"},
+  {id:82,cat:"nervous",src:"神経系 No.82",q:"副交感神経線維を含まないのはどれか。",opts:["動眼神経","三叉神経","顔面神経","迷走神経"],ans:1,exp:"副交感神経線維を含む脳神経は「3（動眼）・7（顔面）・9（舌咽）・10（迷走）」の4つだけです。"},
+  {id:83,cat:"nervous",src:"神経系 No.83",q:"頸神経叢の枝はどれか。",opts:["肩甲上神経","肩甲下神経","鎖骨上神経","鎖骨下筋神経"],ans:2,exp:"鎖骨上神経は頸神経叢の枝です。他の3つは腕神経叢の枝です。"},
+  {id:84,cat:"nervous",src:"神経系 No.84",q:"正しいのはどれか。",opts:["尺骨神経は上腕骨内側上顆の前を通る。","正中神経は手根管を通過する。","総腓骨神経は下腿骨間膜を貫通する。","脛骨神経は外果の下を通る。"],ans:1,exp:"正中神経は手根管を通過します。尺骨神経は内側上顆の後ろ、脛骨神経は内果の後ろを通ります。"},
+  {id:85,cat:"nervous",src:"神経系 No.85",q:"脳幹を構成しないのはどれか。",opts:["小脳","中脳","橋","延髄"],ans:0,exp:"脳幹は中脳・橋・延髄からなり、小脳は含まれません。"},
+  {id:86,cat:"nervous",src:"神経系 No.86",q:"脳脊髄液が産生されるのはどれか。",opts:["側脳室","クモ膜下腔","クモ膜顆粒","硬膜静脈洞"],ans:0,exp:"脳脊髄液は側脳室・第3脳室・第4脳室の「脈絡叢」で産生され、クモ膜顆粒から硬膜静脈洞へ吸収されます。"},
+  {id:87,cat:"nervous",src:"神経系 No.87",q:"副交感神経線維を含むのはどれか。",opts:["嗅神経","動眼神経","三叉神経","舌下神経"],ans:1,exp:"動眼神経（III）は毛様体神経節でニューロンをかえ、瞳孔括約筋と毛様体筋を支配します。"},
+  {id:88,cat:"nervous",src:"神経系 No.88",q:"正しい組合せはどれか。",opts:["三叉神経 ――― 舌根の痛覚","顔面神経 ――― 舌尖の痛覚","舌咽神経 ――― 舌尖の味覚","舌下神経 ――― 舌の運動"],ans:3,exp:"舌下神経は舌の運動を支配します（舌根の痛覚＝舌咽、舌尖の痛覚＝三叉、舌尖の味覚＝顔面）。"},
+  {id:89,cat:"nervous",src:"神経系 No.89",q:"橈骨神経支配でないのはどれか。",opts:["上腕三頭筋","腕橈骨筋","回外筋","長掌筋"],ans:3,exp:"長掌筋は前腕屈筋群の1つで「正中神経」支配です。他の3つは橈骨神経支配です。"},
+  {id:90,cat:"nervous",src:"神経系 No.90",q:"足の指背に分布しないのはどれか。",opts:["伏在神経","腓腹神経","浅腓骨神経","深腓骨神経"],ans:0,exp:"伏在神経は大腿神経の皮枝で、下腿内側〜足背内縁（母指球付近まで）に分布し、指背には分布しません。"},
+  {id:91,cat:"nervous",src:"神経系 No.91",q:"成人の脊髄で正しいのはどれか。",opts:["脊柱管とほぼ同じ長さである。","全長にわたり太さは一定である。","前角に運動神経細胞が存在する。","白質は中心部に存在する。"],ans:2,exp:"脊髄の灰白質は中心部にあり、前角には骨格筋を支配するα・γ運動ニューロンが存在します。"},
+  {id:92,cat:"nervous",src:"神経系 No.92",q:"温痛覚の伝導路はどれか。",opts:["脊髄視床路","錐体路","脊髄小脳路","長後索路"],ans:0,exp:"温痛覚は「外側脊髄視床路」を通って上行します。"},
+  {id:93,cat:"nervous",src:"神経系 No.93",q:"誤っている組合せはどれか。",opts:["滑車神経 ――― 上斜筋","三叉神経 ――― 咀嚼筋","外転神経 ――― 外側直筋","舌咽神経 ――― 声帯筋"],ans:3,exp:"声帯筋（喉頭筋）を支配するのは「迷走神経（反回神経）」です。"},
+  {id:94,cat:"nervous",src:"神経系 No.94",q:"腕神経叢が支配するのはどれか。",opts:["僧帽筋","胸鎖乳突筋","肩甲挙筋","横隔膜"],ans:2,exp:"肩甲挙筋は腕神経叢の枝である「肩甲背神経」に支配されます（僧帽筋・胸鎖乳突筋＝副神経、横隔膜＝頸神経叢）。"},
+  {id:95,cat:"nervous",src:"神経系 No.95",q:"自律神経系について誤っているのはどれか。",opts:["顔面神経は副交感神経線維を含む。","仙骨神経は副交感神経線維を含む。","交感神経の節前ニューロンは脊髄後角に存在する。","大内臓神経は交感神経の節前線維である。"],ans:2,exp:"交感神経の節前ニューロンの細胞体は、胸髄・腰髄の「側角（中間質外側核）」に存在します。"},
+  {id:96,cat:"nervous",src:"神経系 No.96",q:"髄膜で外から内に向けての順で正しいのはどれか。",opts:["軟膜 ― クモ膜 ― 硬膜","軟膜 ― 硬膜 ― クモ膜","硬膜 ― クモ膜 ― 軟膜","硬膜 ― 軟膜 ― クモ膜"],ans:2,exp:"髄膜は外側から「硬膜 → クモ膜 → 軟膜」の3層からなります。"},
+  {id:97,cat:"nervous",src:"神経系 No.97",q:"大脳辺縁系に属する領域はどれか。",opts:["尾状核","レンズ核","海馬","黒質"],ans:2,exp:"海馬・帯状回・扁桃体などは大脳辺縁系に属し、情動や記憶に関与します。"},
+  {id:98,cat:"nervous",src:"神経系 No.98",q:"鳥距溝のある部位はどれか。",opts:["前頭葉","側頭葉","頭頂葉","後頭葉"],ans:3,exp:"鳥距溝は後頭葉の内側面にあり、その周囲が一次視覚野です。"},
+  {id:99,cat:"nervous",src:"神経系 No.99",q:"延髄にある脳神経核はどれか。",opts:["動眼神経核","滑車神経核","外転神経核","迷走神経核"],ans:3,exp:"延髄には9〜12番（舌咽・迷走・副・舌下神経核）が存在します。"},
+  {id:100,cat:"nervous",src:"神経系 No.100",q:"誤っている組合せはどれか。",opts:["視神経 ――― 視神経管","動眼神経 ――― 上眼窩裂","顔面神経 ――― 卵円孔","上顎神経 ――― 正円孔"],ans:2,exp:"卵円孔を通るのは下顎神経（V3）です。顔面神経は内耳孔→茎乳突孔を通ります。"},
+  {id:101,cat:"nervous",src:"神経系 No.101",q:"神経終末に含まれるのはどれか。",opts:["髄鞘","粗面小胞体","ゴルジ装置","シナプス小胞"],ans:3,exp:"軸索の終末（シナプス前終末）には神経伝達物質を蓄えた「シナプス小胞」が含まれます。"},
+  {id:102,cat:"nervous",src:"神経系 No.102",q:"髄膜で誤っているのはどれか。",opts:["左右の大脳半球の間には大脳鎌がある。","大脳鎌の上縁には硬膜静脈洞がある。","小脳と橋との間には小脳テントがある。","小脳テントの開口部はテント切痕と呼ばれる。"],ans:2,exp:"小脳テントは「大脳と小脳」の間にあります（小脳と橋の間にあるのは第4脳室です）。"},
+  {id:103,cat:"nervous",src:"神経系 No.103",q:"椎間孔にあるのはどれか。",opts:["脊髄","馬尾","脊髄神経節","交感神経幹"],ans:2,exp:"脊髄神経節（後根神経節）は隣接する椎骨の間の「椎間孔」に位置します。"},
+  {id:104,cat:"nervous",src:"神経系 No.104",q:"脳神経に含まれる運動性線維で正しいのはどれか。",opts:["動眼神経は上眼瞼挙筋を支配する。","顔面神経は舌の運動に働く。","右迷走神経は大動脈弓で反回する。","副神経は頸神経ワナを経由する。"],ans:0,exp:"動眼神経は外眼筋4筋のほか、上まぶたを引き上げる「上眼瞼挙筋」を支配します。"},
+  {id:105,cat:"nervous",src:"神経系 No.105",q:"脳室で正しいのはどれか。",opts:["室間孔は第三脳室と第四脳室を連絡する。","側脳室前角は前頭葉に位置する。","第三脳室の側壁は中脳である。","第四脳室底の上半部は延髄である。"],ans:1,exp:"側脳室の前角は前頭葉に位置します（第3脳室の側壁は間脳、第4脳室底の上半部は橋）。"},
+  {id:106,cat:"nervous",src:"神経系 No.106",q:"上眼窩裂を通過するのはどれか。",opts:["視神経","眼神経","上顎神経","下顎神経"],ans:1,exp:"上眼窩裂を通過するのは動眼(III)・滑車(IV)・眼神経(V1)・外転(VI)です。"},
+  {id:107,cat:"nervous",src:"神経系 No.107",q:"左右の神経線維が交叉するのはどれか。",opts:["視神経","動眼神経","顔面神経","舌咽神経"],ans:0,exp:"左右の視神経の鼻側線維は間脳底部の「視交叉」で左右交叉します。"},
+  {id:108,cat:"nervous",src:"神経系 No.108",q:"神経と筋との組合せで正しいのはどれか。",opts:["腕神経叢 ――― 前鋸筋","胸神経 ――― 横隔膜","腰神経叢 ――― 大殿筋","仙骨神経叢 ――― 精巣挙筋"],ans:0,exp:"前鋸筋は腕神経叢の枝である「長胸神経」によって支配されます。"},
+  {id:109,cat:"nervous",src:"神経系 No.109",q:"感覚神経節はどれか。",opts:["耳神経節","顎下神経節","膝神経節","毛様体神経節"],ans:2,exp:"膝神経節は顔面神経の味覚ニューロンが集まる感覚神経節です。他の3つは副交感神経節です。"},
+  {id:110,cat:"nervous",src:"神経系 No.110",q:"脳の被膜でないのはどれか。",opts:["硬膜","漿膜","くも膜","軟膜"],ans:1,exp:"脳・脊髄を包む髄膜は硬膜・くも膜・軟膜の3層であり、漿膜はありません。"},
+  {id:111,cat:"nervous",src:"神経系 No.111",q:"運動性失語症と関連するのはどれか。",opts:["ブローカ中枢","ウェルニッケ中枢","海馬","レンズ核"],ans:0,exp:"前頭葉のブローカ中枢（運動性言語野）が障害されると、言葉の理解はできるが発話が困難になる運動性失語症になります。"},
+  {id:112,cat:"nervous",src:"神経系 No.112",q:"大脳脚があるのはどれか。",opts:["延髄","中脳","間脳","大脳髄質"],ans:1,exp:"大脳脚は中脳の腹側部にあり、錐体路などの下行性線維が通ります。"},
+  {id:113,cat:"nervous",src:"神経系 No.113",q:"頸動脈小体および頸動脈洞に関わる脳神経はどれか。",opts:["三叉神経","顔面神経","舌咽神経","副神経"],ans:2,exp:"総頸動脈分岐部にある頸動脈洞（圧受容器）と頸動脈小体（化学受容器）の求心路は「舌咽神経（IX）」です。"},
+  {id:114,cat:"nervous",src:"神経系 No.114",q:"デルマトームで誤っているのはどれか。",opts:["前頭部はC2支配である。","母指はC6支配である。","臍のレベルはT10支配である。","足の小指はS1支配である。"],ans:0,exp:"前頭部の皮膚感覚は三叉神経（眼神経V1）支配です。C2は後頭部を支配します。"},
+  {id:115,cat:"nervous",src:"神経系 No.115",q:"正しい組合せはどれか。",opts:["間脳 ――― 大脳脚","中脳 ――― 黒質","橋 ――― 錐体交叉","延髄 ――― 線条体"],ans:1,exp:"黒質は中脳にあるドーパミン作動性ニューロンを含む神経核です。"},
+  {id:116,cat:"nervous",src:"神経系 No.116",q:"錐体路が通る部位はどれか。",opts:["後索","大脳脚","上下脳脚","視床"],ans:1,exp:"錐体路は大脳皮質運動野 → 内包 → 中脳の「大脳脚」 → 橋 → 延髄錐体交叉を通ります。"},
+  {id:117,cat:"nervous",src:"神経系 No.117",q:"動眼神経核が存在するのはどれか。",opts:["中脳","橋","延髄","脊髄"],ans:0,exp:"動眼神経核とエディンガー・ウェストファル核（副交感）は中脳の上丘レベルにあります。"},
+  {id:118,cat:"nervous",src:"神経系 No.118",q:"下顎神経が支配するのはどれか。",opts:["笑筋","広頸筋","咬筋","頬筋"],ans:2,exp:"咬筋は咀嚼筋であり三叉神経第3枝（下顎神経）支配です。笑筋・広頸筋・頬筋は表情筋で顔面神経支配。"},
+  {id:119,cat:"nervous",src:"神経系 No.119",q:"副交感神経線維を含むのはどれか。",opts:["滑車神経","外転神経","顔面神経","内耳神経"],ans:2,exp:"顔面神経（VII）は涙腺・顎下腺・舌下腺を支配する副交感神経線維を含みます。"},
+  {id:120,cat:"nervous",src:"神経系 No.120",q:"脊髄神経とその数との組合せで正しいのはどれか。",opts:["頸神経 ――― 8対","胸神経 ――― 13対","腰神経 ――― 4対","仙骨神経 ――― 3対"],ans:0,exp:"頸神経は8対、胸神経は12対、腰神経は5対、仙骨神経は5対、尾骨神経は1対（計31対）です。"},
+  {id:121,cat:"nervous",src:"神経系 No.121",q:"大脳皮質の機能局在で正しいのはどれか。",opts:["運動野は頭頂葉にある。","視覚野は後頭葉にある。","運動性言語野は側頭葉にある。","聴覚野は前頭葉にある。"],ans:1,exp:"視覚野は後頭葉の鳥距溝周辺にあります。"},
+  {id:122,cat:"nervous",src:"神経系 No.122",q:"温度覚と痛覚の伝導路が中継される部位はどれか。",opts:["黒質","小脳核","大脳基底核","視床"],ans:3,exp:"すべての体性感覚伝導路（温痛覚の脊髄視床路など）は間脳の「視床（後外側腹側核）」で中継されます。"},
+  {id:123,cat:"nervous",src:"神経系 No.123",q:"前腕の筋を支配しないのはどれか。",opts:["筋皮神経","正中神経","尺骨神経","橈骨神経"],ans:0,exp:"筋皮神経は上腕の屈筋群（上腕二頭筋・上腕筋・烏口腕筋）を支配し、前腕では外側前腕皮神経として皮膚感覚のみを支配します。"},
+  {id:124,cat:"nervous",src:"神経系 No.124",q:"副交感神経と関連するのはどれか。",opts:["翼口蓋神経節","上頸神経節","脊髄神経節","腹腔神経節"],ans:0,exp:"翼口蓋神経節は顔面神経の副交感神経節です（上頸・腹腔神経節は交感神経節、脊髄神経節は感覚神経節）。"},
+  {id:125,cat:"nervous",src:"神経系 No.125",q:"脳水平断の模式図において「尾状核」はどれか。",opts:["a（視床）","b（レンズ核）","c（尾状核頭）","d（脳梁膨大）"],ans:2,diagram:"caudate",exp:"側脳室前角の外側壁に接して突出している灰白質が「尾状核頭（c）」です。"},
+  {id:126,cat:"nervous",src:"神経系 No.126",q:"外側膝状体が中継核となるのはどれか。",opts:["触覚","痛覚","聴覚","視覚"],ans:3,exp:"視床の外側膝状体は「視覚」、内側膝状体は「聴覚」の中継核です。"},
+  {id:127,cat:"nervous",src:"神経系 No.127",q:"錐体交叉があるのはどれか。",opts:["中脳","橋","延髄上部","延髄下部"],ans:3,exp:"錐体交叉は「延髄下部」にあります。"},
+  {id:128,cat:"nervous",src:"神経系 No.128",q:"聴覚を伝える神経はどれか。",opts:["反回神経","蝸牛神経","前庭神経","大耳介神経"],ans:1,exp:"内耳神経（VIII）のうち、蝸牛神経が「聴覚」、前庭神経が「平衡覚」を伝えます。"},
+  {id:129,cat:"nervous",src:"神経系 No.129",q:"頭部正中矢状断MRIの模式図において「視床」はどれか。",opts:["a（脳梁）","b（小脳）","c（視床）","d（橋）"],ans:2,diagram:"sagittal_thalamus",exp:"脳梁（a）のすぐ下方に位置する卵円形の間脳構造が「視床（c）」です。"},
+  {id:130,cat:"nervous",src:"神経系 No.130",q:"動眼神経核があるのはどれか。",opts:["視床","中脳","橋","延髄"],ans:1,exp:"動眼神経核は中脳の上丘レベルにあります。"},
+  {id:131,cat:"nervous",src:"神経系 No.131",q:"室間孔がつなぐ部位はどれか。",opts:["左右の側脳室","側脳室と第三脳室","側脳室と第四脳室","第三脳室と第四脳室"],ans:1,exp:"室間孔（モンロー孔）は左右の側脳室と第3脳室を連絡します。"},
+  {id:132,cat:"nervous",src:"神経系 No.132",q:"喉頭の運動に関与するのはどれか。",opts:["顔面神経","舌咽神経","迷走神経","舌下神経"],ans:2,exp:"喉頭の筋（輪状甲状筋およびその他の内喉頭筋）はすべて「迷走神経」の枝（上喉頭神経・反回神経）が支配します。"},
+  {id:133,cat:"nervous",src:"神経系 No.133",q:"脊髄神経と上腕骨との位置関係で正しいのはどれか。",opts:["腋窩神経は骨体の後面に沿って斜走する。","正中神経は解剖頸に沿う。","筋皮神経は外科頸に沿う。","尺骨神経は内側上顆の後方を通る。"],ans:3,exp:"尺骨神経は上腕骨内側上顆の後方（尺骨神経溝）を通過します（外科頸＝腋窩神経、骨体後面＝橈骨神経）。"},
+  {id:134,cat:"nervous",src:"神経系 No.134",q:"副交感神経の節前線維が出るのはどれか。",opts:["脳幹と胸髄","脳幹と仙髄","胸髄と腰髄","胸髄と仙髄"],ans:1,exp:"副交感神経は「脳幹（III・VII・IX・X）」と「仙髄（S2〜S4）」から出る頭仙系です（交感神経は胸髄・腰髄）。"},
+  {id:135,cat:"nervous",src:"神経系 No.135",q:"大脳前額断の模式図において「交連線維が通る部位（脳梁）」はどれか。",opts:["a（脳梁）","b（内包）","c（被殻）","d（海馬）"],ans:0,diagram:"coronal_cc",exp:"左右の大脳半球を正中で結ぶ白い線維束が「脳梁（a）」で、代表的な交連線維です。"},
+  {id:136,cat:"nervous",src:"神経系 No.136",q:"プルキンエ細胞があるのはどれか。",opts:["大脳","中脳","小脳","脊髄"],ans:2,exp:"プルキンエ細胞は小脳皮質のプルキンエ細胞層にある大型ニューロンです。"},
+  {id:137,cat:"nervous",src:"神経系 No.137",q:"後索核が関与する感覚はどれか。",opts:["温覚","冷覚","痛覚","深部感覚"],ans:3,exp:"延髄の後索核（薄束核・楔状束核）は、意識にのぼる深部感覚と識別性触圧覚を中継します。"},
+  {id:138,cat:"nervous",src:"神経系 No.138",q:"運動線維のみからなる脳神経はどれか。",opts:["動眼神経","三叉神経","顔面神経","舌下神経"],ans:3,exp:"純粋な運動性脳神経は「3（動眼）・4（滑車）・6（外転）・11（副）・12（舌下）」です（選択肢中では舌下神経。動眼神経は副交感線維も含むため純粋な体性運動のみを問う場合は舌下神経が正解）。"},
+  {id:139,cat:"nervous",src:"神経系 No.139",q:"正しいのはどれか。",opts:["上腕深動脈に伴走する神経は上腕屈筋群を支配する。","上腕動脈に伴走し肘窩を通る神経は前腕屈筋群を支配する。","上腕二頭筋の内側縁に沿う神経は前腕伸筋群を支配する。","上腕骨外科頸に沿う神経は大円筋を支配する。"],ans:1,exp:"上腕動脈に伴走して肘窩を通るのは「正中神経」で、前腕屈筋群を支配します。"},
+  {id:140,cat:"nervous",src:"神経系 No.140",q:"デルマトームの分布領域を示す神経はどれか。",opts:["運動神経","感覚神経","交感神経","副交感神経"],ans:1,exp:"デルマトーム（皮膚分節）は各脊髄節の「感覚神経（後根）」が支配する皮膚領域を示します。"},
+  {id:141,cat:"nervous",src:"神経系 No.141",q:"小脳にあるのはどれか。",opts:["歯状核","淡蒼球","被殻","尾状核"],ans:0,exp:"小脳の深部核（小脳核）には歯状核・栓状核・球状核・室頂核があります。他はすべて大脳基底核です。"},
+  {id:142,cat:"nervous",src:"神経系 No.142",q:"伝導路で正しいのはどれか。",opts:["随意運動の伝導路は脊髄で左右交叉する。","視覚伝導路は内側膝状体で中継される。","温痛覚の伝導路は後索を上行する。","錐体路は大脳脚を通る。"],ans:3,exp:"錐体路（皮質脊髄路）は中脳の大脳脚を通過します。"},
+  {id:143,cat:"nervous",src:"神経系 No.143",q:"橋背部に脳神経核群をもつのはどれか。",opts:["内耳神経","舌咽神経","迷走神経","舌下神経"],ans:0,exp:"内耳神経核（蝸牛神経核・前庭神経核）は橋〜延髄上部の背側（第4脳室底の外側部）に位置します。"},
+  {id:144,cat:"nervous",src:"神経系 No.144",q:"腕神経叢の模式図において「烏口腕筋を貫き、上腕の屈筋群を支配する神経」はどれか。",opts:["a（筋皮神経）","b（正中神経）","c（尺骨神経）","d（橈骨神経）"],ans:0,diagram:"brachial_plexus",exp:"外側神経束から出て烏口腕筋を貫通し、上腕二頭筋・上腕筋を支配するのは「筋皮神経（a）」です。"},
+  {id:145,cat:"nervous",src:"神経系 No.145",q:"神経支配で正しいのはどれか。",opts:["浅胸筋は胸神経前枝に支配される。","側腹筋は腰神経叢の枝に支配される。","横隔膜は頸神経叢の枝に支配される。","深背筋第1層は脊髄神経後枝に支配される。"],ans:2,exp:"横隔膜は頸神経叢の枝である「横隔神経」に支配されます（浅胸筋＝腕神経叢の胸筋神経、側腹筋＝肋間神経など）。"},
+  {id:146,cat:"nervous",src:"神経系 No.146",q:"動眼神経支配を受けるのはどれか。",opts:["眼輪筋","毛様体筋","瞳孔散大筋","上斜筋"],ans:1,exp:"毛様体筋（水晶体調節）は動眼神経の副交感線維が支配します（眼輪筋＝顔面、瞳孔散大筋＝交感神経、上斜筋＝滑車神経）。"},
+  {id:147,cat:"nervous",src:"神経系 No.147",q:"左大脳半球の模式図において「ウェルニッケ野（感覚性言語野）」はどれか。",opts:["a（ブローカ野）","b（一次運動野）","c（一次体性感覚野）","d（ウェルニッケ野）"],ans:3,diagram:"wernicke",exp:"ウェルニッケ野は側頭葉（上側頭回後部）の「d」に位置します。aはブローカ野です。"},
+  {id:148,cat:"nervous",src:"神経系 No.148",q:"中脳横断面の模式図において、矢印で示す部位（黒質）のドーパミン作動性ニューロンが投射するのはどれか。",opts:["歯状核","オリーブ核","赤核","被殻"],ans:3,diagram:"substantia_nigra",exp:"中脳の黒質からはドーパミン作動性ニューロンが線条体（被殻・尾状核）へ投射し、パーキンソン病と深く関わります。"},
+  {id:149,cat:"nervous",src:"神経系 No.149",q:"内側膝状体が関与しているのはどれか。",opts:["嗅覚路","視覚路","聴覚路","味覚路"],ans:2,exp:"内側膝状体は「聴覚路」、外側膝状体は「視覚路」の中継核です。"},
+  {id:150,cat:"nervous",src:"神経系 No.150",q:"脳幹の背面から出ているのはどれか。",opts:["動眼神経","滑車神経","外転神経","顔面神経"],ans:1,exp:"滑車神経（IV）は12対の脳神経の中で唯一、脳幹（中脳下丘の尾側）の「背面」から出る神経です。"},
+  {id:151,cat:"nervous",src:"神経系 No.151",q:"脊髄神経で正しいのはどれか。",opts:["梨状筋上孔を通る神経は大殿筋を支配する。","鼠径靭帯下の筋裂孔を通る神経は大腿内転筋群を支配する。","足根管を通る神経は足背の筋を支配する。","前腕骨間膜に沿う神経は指関節屈筋を支配する。"],ans:3,exp:"前腕骨間膜の前面に沿う前骨間神経（正中神経の枝）は長母指屈筋や深指屈筋（示指・中指）を支配します。"},
+  {id:152,cat:"nervous",src:"神経系 No.152",q:"尺骨神経麻痺の症状はどれか。",opts:["第1指と第2指で正円を作れない。","手関節の背屈ができない。","第4指MP関節が過屈曲する。","骨間筋が萎縮する。"],ans:3,exp:"尺骨神経はすべての骨間筋（背側・掌側骨間筋）を支配するため、麻痺すると骨間筋が萎縮し「鷲手」になります。"},
+  {id:153,cat:"nervous",src:"神経系 No.153",q:"中大脳動脈が通るのはどれか。",opts:["硬膜","クモ膜","クモ膜下腔","軟膜"],ans:2,exp:"脳表の主要動脈（中大脳動脈など）は「クモ膜下腔」を走行します。"},
+  {id:154,cat:"nervous",src:"神経系 No.154",q:"錐体路の構成要素でないのはどれか。",opts:["大脳皮質","大脳脚","橋背部","延髄前角"],ans:2,exp:"錐体路は橋の「底部（橋縦束）」を通過します。橋背部には通りません。"},
+  {id:155,cat:"nervous",src:"神経系 No.155",q:"頸動脈小体および頸動脈洞に関わる脳神経はどれか。",opts:["三叉神経","顔面神経","舌咽神経","副神経"],ans:2,exp:"舌咽神経（IX）が頸動脈洞・頸動脈小体からの求心性情報を延髄の孤束核へ伝えます。"},
+  {id:156,cat:"nervous",src:"神経系 No.156",q:"頭蓋底模式図において「舌筋の支配神経（舌下神経）」が通る出口はどれか。",opts:["1（視神経管）","2（卵円孔）","3（頚静脈孔）","4（舌下神経管）"],ans:3,diagram:"cranial_base_hypoglossal",exp:"舌筋の運動を支配する舌下神経（XII）は、大後頭孔の前外側にある「舌下神経管（4）」を通ります。"},
+  {id:157,cat:"nervous",src:"神経系 No.157",q:"腕神経叢が通過するのはどこか。",opts:["前斜角筋の前","前斜角筋と中斜角筋の間","中斜角筋と後斜角筋の間","後斜角筋の後"],ans:1,exp:"腕神経叢と鎖骨下動脈は「前斜角筋と中斜角筋の間（斜角筋隙）」を通過します。"},
+  {id:158,cat:"nervous",src:"神経系 No.158",q:"下腿の伸筋を支配するのはどれか。",opts:["脛骨神経","腓腹神経","浅腓骨神経","深腓骨神経"],ans:3,exp:"深腓骨神経は下腿前面の伸筋群（前脛骨筋・長母指伸筋・長指伸筋）を支配します。"},
+  {id:159,cat:"nervous",src:"神経系 No.159",q:"臍部の皮膚神経はどれか。",opts:["第7胸神経","第10胸神経","第1腰神経","第3腰神経"],ans:1,exp:"デルマトームの重要指標：乳頭＝T4、剣状突起＝T6、臍＝T10、鼠径部＝L1。"},
+  {id:160,cat:"nervous",src:"神経系 No.160",q:"滑車神経が支配するのはどれか。",opts:["上斜筋","上直筋","下斜筋","下直筋"],ans:0,exp:"滑車神経（IV）は「上斜筋」のみを支配します（ゴロ：滑車は上斜）。"},
+  {id:161,cat:"nervous",src:"神経系 No.161",q:"脳の部位と脳室の組合せで誤っているのはどれか。",opts:["視床 ――― 第3脳室","視床下部 ――― 第3脳室","中脳 ――― 第4脳室","小脳 ――― 第4脳室"],ans:2,exp:"中脳にあるのは「中脳水道」です。第4脳室は橋・延髄と小脳の間にあります。"},
+  {id:162,cat:"nervous",src:"神経系 No.162",q:"上行性伝導路はどれか。",opts:["視蓋脊髄路","前庭脊髄路","赤核脊髄路","脊髄視床路"],ans:3,exp:"「脊髄視床路」は温痛覚や触圧覚を伝える上行性伝導路です。他はすべて錐体外路系の下行性伝導路です。"},
+  {id:163,cat:"nervous",src:"神経系 No.163",q:"脊髄横断面の模式図において「意識にのぼる深部感覚の伝導路」はどれか。",opts:["1（後索）","2（側索）","3（前索）","4（灰白質）"],ans:0,diagram:"spinal_cord",exp:"意識にのぼる深部感覚（位置覚・振動覚）と識別性触圧覚は、脊髄の「後索（1：薄束・楔状束）」を上行します。"},
+  {id:164,cat:"nervous",src:"神経系 No.164",q:"中脳の上丘レベルで脳神経核群をもつのはどれか。",opts:["外転神経","滑車神経","顔面神経","動眼神経"],ans:3,exp:"中脳の上丘レベルに「動眼神経核」、下丘レベルに「滑車神経核」があります。"},
+  {id:165,cat:"nervous",src:"神経系 No.165",q:"副交感性線維を含む脳神経はいくつあるか。",opts:["3","4","5","6"],ans:1,exp:"動眼(III)・顔面(VII)・舌咽(IX)・迷走(X)の「4つ」です。"},
+  {id:166,cat:"nervous",src:"神経系 No.166",q:"右の反回神経が反回する動脈はどれか。",opts:["肋頸動脈","鎖骨下動脈","腕頭動脈","大動脈弓"],ans:1,exp:"右反回神経は「右鎖骨下動脈」の下を反回し、左反回神経は「大動脈弓」の下を反回します。"},
+  {id:167,cat:"nervous",src:"神経系 No.167",q:"仙骨神経由来はどれか。",opts:["陰部大腿神経","外側大腿皮神経","後大腿皮神経","大腿神経"],ans:2,exp:"後大腿皮神経は仙骨神経叢（S1〜S3）由来です。他の3つは腰神経叢の枝です。"},
+  {id:168,cat:"nervous",src:"神経系 No.168",q:"外肛門括約筋支配神経はどれか。",opts:["骨盤内臓神経","上直腸神経","下直腸神経","会陰神経"],ans:2,exp:"外肛門括約筋は随意筋（骨格筋）であり、陰部神経の枝である「下直腸神経」が支配します。"},
+  {id:169,cat:"nervous",src:"神経系 No.169",q:"脳脊髄液で満たされているのはどれか。",opts:["硬膜外葉と硬膜内葉の間","硬膜内葉とクモ膜の間","クモ膜と軟膜の間","軟膜と脳実質の間"],ans:2,exp:"脳脊髄液は「クモ膜と軟膜の間（クモ膜下腔）」および脳室内を満たしています。"},
+  {id:170,cat:"nervous",src:"神経系 No.170",q:"運動野があるのはどれか。",opts:["前頭葉","頭頂葉","側頭葉","後頭葉"],ans:0,exp:"一次運動野（中心前回）は前頭葉にあります。"},
+  {id:171,cat:"nervous",src:"神経系 No.171",q:"脳の構造物で一番前方にあるのはどれか。",opts:["四丘体","視交叉","松果体","乳頭体"],ans:1,exp:"視交叉は間脳視床下部の最前端にあり、四丘体・松果体・乳頭体よりも前方に位置します。"},
+  {id:172,cat:"nervous",src:"神経系 No.172",q:"遠心性神経線維のみを通すのはどれか。",opts:["脊髄神経の前枝","脊髄神経の後枝","脊髄の前根","脊髄の後根"],ans:2,exp:"脊髄の前根は遠心性（運動性）線維のみを通します。"},
+  {id:173,cat:"nervous",src:"神経系 No.173",q:"副交感神経線維を含むのはどれか。",opts:["眼窩上神経","眼窩下神経","動眼神経","視神経"],ans:2,exp:"動眼神経（III）は副交感神経線維を含みます。眼窩上・眼窩下神経は三叉神経の皮枝です。"},
+  {id:174,cat:"nervous",src:"神経系 No.174",q:"障害されると猿手を起こすのはどれか。",opts:["腋窩神経","尺骨神経","正中神経","橈骨神経"],ans:2,exp:"正中神経麻痺で母指球筋が萎縮すると「猿手」になります。"},
+
+  // ================= 感覚器 No.175〜235（プリントNo.1〜61） =================
+  {id:175,cat:"sensory",src:"感覚器 No.1",q:"皮膚について誤っているのはどれか。",opts:["皮膚は表皮、真皮および皮下組織の三層からなる。","表皮は重層扁平上皮からなる。","真皮は強靭な線維性結合組織からなる。","皮下組織に色素細胞がある。"],ans:3,exp:"メラニン色素をつくる色素細胞（メラノサイト）は「表皮の基底層」にあります。"},
+  {id:176,cat:"sensory",src:"感覚器 No.2",q:"感覚器について正しいのはどれか。",opts:["乳腺は内分泌腺である。","硝子体はカメラのレンズに相当する。","毛、爪は真皮の変形したものである。","鼓室には耳小骨がある。"],ans:3,exp:"中耳の鼓室には3つの耳小骨（ツチ・キヌタ・アブミ骨）があります。レンズは水晶体、毛・爪は表皮の変形です。"},
+  {id:177,cat:"sensory",src:"感覚器 No.3",q:"感覚器について誤っているのはどれか。",opts:["網膜には視細胞がある。","鼓室には3つの耳小骨がある。","味蕾は糸状乳頭にある。","嗅神経は篩骨篩板を貫く。"],ans:2,exp:"糸状乳頭には味蕾が存在しません（味蕾があるのは茸状・葉状・有郭乳頭）。"},
+  {id:178,cat:"sensory",src:"感覚器 No.4",q:"皮膚について正しいのはどれか。",opts:["表皮と真皮との2層からなる。","毛は表皮が変形したものである。","真皮は疎性結合組織からなる。","汗腺は表皮内にある。"],ans:1,exp:"毛と爪は表皮が角化して変形したものです（真皮は緻密結合組織、汗腺は真皮〜皮下組織にあります）。"},
+  {id:179,cat:"sensory",src:"感覚器 No.5",q:"感覚器について正しいのはどれか。",opts:["水晶体はカメラのレンズに相当する。","蝸牛は平衡覚に関与する。","味蕾は舌下神経に支配される。","視神経乳頭は視力が最もよい。"],ans:0,exp:"水晶体はレンズに相当します（蝸牛＝聴覚、視神経乳頭＝盲点）。"},
+  {id:180,cat:"sensory",src:"感覚器 No.6",q:"皮膚について誤っているのはどれか。",opts:["真皮は緻密性（強靭）結合組織である。","皮下組織は疎性線維性結合組織である。","大汗腺は全身の皮膚にある。","爪は表皮が変形したものである。"],ans:2,exp:"大汗腺（アポクリン汗腺）は腋窩・外陰部・乳輪など限られた部位にあります（全身にあるのは小汗腺＝エクリン汗腺）。"},
+  {id:181,cat:"sensory",src:"感覚器 No.7",q:"内耳にあるのはどれか。",opts:["蝸牛","鼓膜","耳管","耳小骨"],ans:0,exp:"内耳には蝸牛・前庭・半規管があります。鼓膜・耳管・耳小骨は中耳関連です。"},
+  {id:182,cat:"sensory",src:"感覚器 No.8",q:"皮膚について誤っているのはどれか。",opts:["表皮は重層扁平上皮である。","爪は真皮の変形したものである。","腋窩の皮膚にはアポクリン汗腺がある。","皮下組織には多数の脂肪細胞がある。"],ans:1,exp:"爪は「表皮」が変形したものです。"},
+  {id:183,cat:"sensory",src:"感覚器 No.9",q:"感覚器について誤っているのはどれか。",opts:["マイスネル小体は真皮にある。","角膜は脈絡膜と連続している。","嗅粘膜は上鼻道にある。","舌には味蕾がある。"],ans:1,exp:"角膜は外膜（線維膜）の前面にあり、後方の「強膜」と連続しています。"},
+  {id:184,cat:"sensory",src:"感覚器 No.10",q:"感覚器とその機能との組合せで誤っているのはどれか。",opts:["膨大部稜 ――― 平衡覚","コルチ器 ――― 聴覚","マイスネル小体 ――― 痛覚","パチニ小体 ――― 圧覚"],ans:2,exp:"マイスネル小体は真皮乳頭にある「触覚」の受容器です。痛覚は自由神経終末です。"},
+  {id:185,cat:"sensory",src:"感覚器 No.11",q:"色を感受するのはどれか。",opts:["色素上皮細胞","双極細胞","視神経細胞","錐状体細胞"],ans:3,exp:"網膜の錐状体細胞が色彩を感受します（杆状体細胞は明暗を感受）。"},
+  {id:186,cat:"sensory",src:"感覚器 No.12",q:"聴覚に関与しないのはどれか。",opts:["蝸牛","前庭","耳小骨","鼓膜"],ans:1,exp:"前庭は半規管とともに「平衡覚」に関与します。"},
+  {id:187,cat:"sensory",src:"感覚器 No.13",q:"鼓膜から音の伝わる順序で正しいのはどれか。",opts:["ツチ骨 → キヌタ骨 → アブミ骨","キヌタ骨 → ツチ骨 → アブミ骨","アブミ骨 → ツチ骨 → キヌタ骨","ツチ骨 → アブミ骨 → キヌタ骨"],ans:0,exp:"鼓膜側から「ツチ骨 → キヌタ骨 → アブミ骨」の順に振動を伝えます。"},
+  {id:188,cat:"sensory",src:"感覚器 No.14",q:"肉眼で見えるのはどれか。",opts:["網膜","虹彩","毛様体","涙腺"],ans:1,exp:"虹彩は角膜を通して外から見える部分です。"},
+  {id:189,cat:"sensory",src:"感覚器 No.15",q:"皮膚について正しいのはどれか。",opts:["手掌の皮膚には小汗腺（エクリン汗腺）が多い。","立毛筋は骨格筋である。","皮静脈は表皮と真皮との間を走行する。","爪は先端部の細胞の増殖によって伸びる。"],ans:0,exp:"手掌・足底には小汗腺（エクリン汗腺）が特に多く分布します（脂腺はありません）。"},
+  {id:190,cat:"sensory",src:"感覚器 No.16",q:"眼球について正しいのはどれか。",opts:["毛様体は瞳孔の大きさを変える。","錐状体が最も多いのは視神経乳頭である。","角膜は強膜の続きである。","視細胞は硝子体に面している。"],ans:2,exp:"角膜は強膜の続きで、合わせて眼球の線維膜（外膜）を構成します。"},
+  {id:191,cat:"sensory",src:"感覚器 No.17",q:"聴覚に関与しないのはどれか。",opts:["蝸牛","三半規管","耳小骨","鼓膜"],ans:1,exp:"三半規管（半規管）は回転加速度を感知する「平衡覚」の器官です。"},
+  {id:192,cat:"sensory",src:"感覚器 No.18",q:"眼球について正しいのはどれか。",opts:["繊維膜は角膜と強膜とに分けられる。","虹彩には血管が分布しない。","毛様体筋の収縮によって水晶体が薄くなる。","網膜の杆状体は色を感じる。"],ans:0,exp:"線維膜（外膜）は前1/6の角膜と後5/6の強膜に分けられます。"},
+  {id:193,cat:"sensory",src:"感覚器 No.19",q:"内耳について正しいのはどれか。",opts:["半規管は前庭と蝸牛との間にある。","コルチ器は外リンパの中にある。","内リンパと外リンパは前庭で交通している。","外リンパは骨迷路と膜迷路との間を満たす。"],ans:3,exp:"外リンパは骨迷路と膜迷路の間を満たし、膜迷路の中は内リンパで満たされています。"},
+  {id:194,cat:"sensory",src:"感覚器 No.20",q:"耳について誤っているのはどれか。",opts:["鼓膜は外耳と中耳の間にある。","中耳は喉頭と連絡している。","中耳には3つの耳小骨がある。","内耳は側頭骨の錐体の中にある。"],ans:1,exp:"中耳は耳管を介して「咽頭（鼻咽腔）」と連絡しています。"},
+  {id:195,cat:"sensory",src:"感覚器 No.21",q:"コルチ器があるのはどれか。",opts:["皮膚","眼球","内耳","鼻腔"],ans:2,exp:"聴覚の受容器であるコルチ器（らせん器）は「内耳」の蝸牛管内にあります。"},
+  {id:196,cat:"sensory",src:"感覚器 No.22",q:"味蕾が存在しないのはどれか。",opts:["糸状乳頭","茸状乳頭","葉状乳頭","有郭乳頭"],ans:0,exp:"糸状乳頭は舌背に最も多い乳頭ですが、味蕾がありません。"},
+  {id:197,cat:"sensory",src:"感覚器 No.23",q:"大汗腺（アポクリン汗腺）が多く分布するのはどれか。",opts:["鼻翼","腋窩","手掌","手背"],ans:1,exp:"大汗腺（アポクリン汗腺）は腋窩・外陰部・肛門周囲などに分布します。"},
+  {id:198,cat:"sensory",src:"感覚器 No.24",q:"皮膚について正しいのはどれか。",opts:["表皮は単層立方上皮からなる。","皮下組織は疎性結合組織からなる。","毛包には大汗腺が開口する。","立毛筋は横紋筋である。"],ans:1,exp:"皮下組織は疎性結合組織からなり脂肪組織に富みます（注：アポクリン汗腺や脂腺も毛包に開口しますが、国試正答は2です）。"},
+  {id:199,cat:"sensory",src:"感覚器 No.25",q:"感覚神経がシナプスを介さないで脳に至る（中枢へ直接軸索を伸ばす）のはどれか。",opts:["視覚器","味覚器","聴覚器","嗅覚器"],ans:3,exp:"嗅細胞は感覚細胞であると同時にニューロンであり、脳（嗅球）まで直接軸索を伸ばします。"},
+  {id:200,cat:"sensory",src:"感覚器 No.26",q:"皮膚腺でないのはどれか。",opts:["エクリン汗腺","アポクリン汗腺","涙腺","脂腺"],ans:2,exp:"涙腺は眼の付属器（外分泌腺）であり、皮膚腺ではありません。"},
+  {id:201,cat:"sensory",src:"感覚器 No.27",q:"色彩に感受性が高いのはどれか。",opts:["杆状体","錐状体","毛様体","虹彩"],ans:1,exp:"網膜の「錐状体細胞」が色彩を感受します。"},
+  {id:202,cat:"sensory",src:"感覚器 No.28",q:"痛みの受容器はどれか。",opts:["ニッスル小体","パチニ小体","筋紡錘","自由神経終末"],ans:3,exp:"痛覚や温度覚の受容器は「自由神経終末」です。"},
+  {id:203,cat:"sensory",src:"感覚器 No.29",q:"視覚の伝導路で誤っているのはどれか。",opts:["網膜の両耳側からの線維は視交叉で交叉する。","上丘は網膜の情報を受ける。","視索は外側膝状体に至る。","視放線は後頭葉に至る。"],ans:0,exp:"視交叉で交叉するのは「両鼻側」からの線維です。両耳側からの線維は同側を通ります。"},
+  {id:204,cat:"sensory",src:"感覚器 No.30",q:"運動神経が分布するのはどれか。",opts:["マイスネル小体","パチニ小体","腱紡錘","筋紡錘"],ans:3,exp:"筋紡錘には錘内筋線維を収縮させて感度を調節する「γ運動ニューロン」が分布します。"},
+  {id:205,cat:"sensory",src:"感覚器 No.31",q:"内耳にあるのはどれか。",opts:["鼓膜","鼓室","耳管","蝸牛"],ans:3,exp:"内耳は蝸牛・前庭・半規管からなります。"},
+  {id:206,cat:"sensory",src:"感覚器 No.32",q:"眼球について誤っているのはどれか。",opts:["水晶体が混濁した状態を白内障という。","眼房水の循環障害で眼内圧が亢進する。","網膜で最初に光を受け取るのは視細胞である。","黄斑の中央部には視神経乳頭がある。"],ans:3,exp:"黄斑の中央にあるのは「中心窩」です。視神経乳頭は別の場所にある盲点です。"},
+  {id:207,cat:"sensory",src:"感覚器 No.33",q:"平衡斑が存在するのはどれか。",opts:["前庭","蝸牛管","鼓室階","半規管"],ans:0,exp:"前庭の卵形嚢と球形嚢には「平衡斑」があり、半規管には「膨大部稜」があります。"},
+  {id:208,cat:"sensory",src:"感覚器 No.34",q:"真皮乳頭に分布するのはどれか。",opts:["マイスネル小体","メルケル触覚円板","パチニ小体","自由神経終末"],ans:0,exp:"マイスネル小体（触覚）は真皮の乳頭層に分布します。"},
+  {id:209,cat:"sensory",src:"感覚器 No.35",q:"聴覚路に含まれるのはどれか。",opts:["上丘と内側膝状体","下丘と外側膝状体","上丘と外側膝状体","下丘と内側膝状体"],ans:3,exp:"聴覚路は中脳の「下丘」と間脳の「内側膝状体」を通ります。"},
+  {id:210,cat:"sensory",src:"感覚器 No.36",q:"光が角膜から網膜に達するまでの経路で正しいのはどれか。",opts:["角膜 → 水晶体 → 硝子体 → 眼房 → 網膜","角膜 → 水晶体 → 眼房 → 硝子体 → 網膜","角膜 → 眼房 → 水晶体 → 硝子体 → 網膜","角膜 → 硝子体 → 眼房 → 水晶体 → 網膜"],ans:2,exp:"前から順に「角膜 → 眼房（眼房水） → 水晶体 → 硝子体 → 網膜」です。"},
+  {id:211,cat:"sensory",src:"感覚器 No.37",q:"嗅覚系で正しいのはどれか。",opts:["嗅細胞は脳内にある。","嗅細胞の先端は自由神経終末である。","嗅神経は篩骨の篩板を通る。","嗅神経は嗅索内の神経細胞とシナプス接合をする。"],ans:2,exp:"嗅細胞の軸索（嗅神経）は篩骨の篩板を貫いて頭蓋内に入り、「嗅球」でシナプス接合します。"},
+  {id:212,cat:"sensory",src:"感覚器 No.38",q:"表皮の最表層はどれか。",opts:["有棘層","顆粒層","淡明層","角質層"],ans:3,exp:"表皮の最表層は「角質層」です（深層から基底・有棘・顆粒・淡明・角質層）。"},
+  {id:213,cat:"sensory",src:"感覚器 No.39",q:"聴覚の情報が伝達される経路で正しいのはどれか。",opts:["外耳道 → 鼓膜 → キヌタ骨 → ツチ骨 → アブミ骨 → 鼓室階 → 前庭階","外耳道 → 鼓膜 → ツチ骨 → キヌタ骨 → アブミ骨 → 前庭階 → 鼓室階","外耳道 → ツチ骨 → キヌタ骨 → アブミ骨 → 鼓膜 → 前庭階 → 鼓室階","外耳道 → キヌタ骨 → ツチ骨 → アブミ骨 → 鼓膜 → 鼓室階 → 前庭階"],ans:1,exp:"外耳道 → 鼓膜 → ツチ骨 → キヌタ骨 → アブミ骨 → 前庭窓 → 前庭階 → 鼓室階の順に伝わります。"},
+  {id:214,cat:"sensory",src:"感覚器 No.40",q:"眼球で正しいのはどれか。",opts:["虹彩は内膜である。","脈絡膜は線維膜である。","瞳孔括約筋は交感神経支配である。","毛様体は平滑筋を含む。"],ans:3,exp:"毛様体には平滑筋である「毛様体筋」が含まれ、水晶体の厚さを調節します。"},
+  {id:215,cat:"sensory",src:"感覚器 No.41",q:"耳管が連絡するのはどれか。",opts:["耳介 ――― 鼓膜","中耳 ――― 咽頭","内耳 ――― 鼻腔","外耳 ――― 中耳"],ans:1,exp:"耳管は中耳（鼓室）と咽頭（鼻咽腔）を連絡し、鼓室内の気圧を調節します。"},
+  {id:216,cat:"sensory",src:"感覚器 No.42",q:"皮膚付属器について正しいのはどれか。",opts:["毛は真皮の一部が変化したものである。","立毛筋は横紋筋である。","毛包浅部に汗孔が開口する。","爪母基から新しい爪が生える。"],ans:3,exp:"爪は根元にある「爪母基」の細胞増殖によって先端へ伸びます。"},
+  {id:217,cat:"sensory",src:"感覚器 No.43",q:"平衡覚を司るのはどれか。",opts:["前庭階","蝸牛窓","前庭器","前庭窓"],ans:2,exp:"内耳の「前庭器（前庭＋半規管）」が平衡覚を司ります。"},
+  {id:218,cat:"sensory",src:"感覚器 No.44",q:"眼房水を産生するのはどれか。",opts:["虹彩","毛様体","網膜","脈絡膜"],ans:1,exp:"眼房水は「毛様体（毛様体突起）」から産生されます。"},
+  {id:219,cat:"sensory",src:"感覚器 No.45",q:"中耳に存在するのはどれか。",opts:["耳道腺","耳管","骨迷路","平衡砂"],ans:1,exp:"中耳には鼓室・耳小骨・耳管・鼓膜張筋・アブミ骨筋が存在します。"},
+  {id:220,cat:"sensory",src:"感覚器 No.46",q:"内耳に含まれるのはどれか。",opts:["鼓膜","鼓室","前庭","耳管"],ans:2,exp:"前庭は内耳（骨迷路）の一部です。"},
+  {id:221,cat:"sensory",src:"感覚器 No.47",q:"白内障の病変部位はどれか。",opts:["虹彩","水晶体","硝子体","視神経乳頭"],ans:1,exp:"白内障は「水晶体」が白く混濁する疾患です。"},
+  {id:222,cat:"sensory",src:"感覚器 No.48",q:"皮脂腺はどれか。",opts:["耳下腺","顎下腺","乳腺","前立腺"],ans:2,exp:"乳腺は皮膚腺（アポクリン汗腺の変形）の一種であり、他の3つは唾液腺や生殖器付属腺です。"},
+  {id:223,cat:"sensory",src:"感覚器 No.49",q:"網膜の浅層（硝子体側）から深層（脈絡膜側）の順で正しいのはどれか。",opts:["視細胞層 → 双極細胞層 → 視神経細胞層","視細胞層 → 視神経細胞層 → 双極細胞層","視神経細胞層 → 視細胞層 → 双極細胞層","視神経細胞層 → 双極細胞層 → 視細胞層"],ans:3,exp:"硝子体側（内側）から順に「視神経細胞層 → 双極細胞層 → 視細胞層」です。"},
+  {id:224,cat:"sensory",src:"感覚器 No.50",q:"皮膚の内部構造物と部位の組合せで正しいのはどれか。",opts:["アポクリン汗腺 ――― 表皮","エクリン汗腺 ――― 真皮","パチニ小体 ――― 表皮","マイスネル小体 ――― 皮下組織"],ans:1,exp:"エクリン汗腺の腺体部は「真皮（〜皮下組織上部）」にあります。"},
+  {id:225,cat:"sensory",src:"感覚器 No.51",q:"眼球に付着しないのはどれか。",opts:["上斜筋","下直筋","外側直筋","上眼瞼挙筋"],ans:3,exp:"上眼瞼挙筋は上まぶた（上眼瞼）に付着する筋で、眼球には付着しません。"},
+  {id:226,cat:"sensory",src:"感覚器 No.52",q:"平衡斑があるのはどれか。",opts:["前庭","蝸牛管","鼓室階","半規管"],ans:0,exp:"平衡斑（耳石器）は前庭の卵形嚢と球形嚢にあります。"},
+  {id:227,cat:"sensory",src:"感覚器 No.53",q:"鼻涙管の開口部位はどれか。",opts:["最上鼻道","上鼻道","中鼻道","下鼻道"],ans:3,exp:"鼻涙管は「下鼻道」に開口します。"},
+  {id:228,cat:"sensory",src:"感覚器 No.54",q:"味覚に関与しないのはどれか。",opts:["顔面神経","舌咽神経","舌下神経","迷走神経"],ans:2,exp:"舌下神経（XII）は舌筋の運動のみを支配し、味覚には関与しません。"},
+  {id:229,cat:"sensory",src:"感覚器 No.55",q:"腹腔神経節でニューロンをかえるのはどれか。",opts:["脳神経","脊髄神経","交感神経","副交感神経"],ans:2,exp:"腹腔神経節は横隔膜直下にある「交感神経節（椎前神経節）」であり、大内臓神経などの交感神経節前線維がここでニューロンをかえます。"},
+  {id:230,cat:"sensory",src:"感覚器 No.56",q:"水晶体が最も厚くなるのはどれか。",opts:["遠くを見るとき","近くを見るとき","暗い所へ入ったとき","明るい所へ出たとき"],ans:1,exp:"近くを見るとき（近見調節）、動眼神経（副交感）の働きで毛様体筋が収縮し、チン小帯が弛緩して水晶体が厚くなります。"},
+  {id:231,cat:"sensory",src:"感覚器 No.57",q:"眼房水の吸収部位はどれか。",opts:["毛様体突起","シュレム管（強膜静脈洞）","硝子体","涙嚢"],ans:1,exp:"毛様体で産生された眼房水は、後眼房 → 瞳孔 → 前眼房を経て虹彩角膜角の「シュレム管（強膜静脈洞）」から静脈へ吸収されます。"},
+  {id:232,cat:"sensory",src:"感覚器 No.58",q:"内耳の蝸牛管内にある基底板の上に位置する聴覚受容器はどれか。",opts:["平衡斑","膨大部稜","コルチ器（らせん器）","耳石器"],ans:2,exp:"蝸牛管の基底板上には有毛細胞をもつ「コルチ器（らせん器）」があり、音の振動を電気信号に変換します。"},
+  {id:233,cat:"sensory",src:"感覚器 No.59",q:"半規管の膨大部稜が感知する刺激はどれか。",opts:["直線加速度","回転加速度","重力（頭の傾き）","音波の振動"],ans:1,exp:"3つの半規管の膨大部稜は「回転加速度」を感知し、前庭の平衡斑（卵形嚢・球形嚢）は「直線加速度と頭の傾き」を感知します。"},
+  {id:234,cat:"sensory",src:"感覚器 No.60",q:"舌前2/3の味覚を伝える神経はどれか。",opts:["三叉神経","顔面神経（鼓索神経）","舌咽神経","舌下神経"],ans:1,exp:"舌前2/3の味覚は「顔面神経（鼓索神経）」、舌後1/3の味覚は「舌咽神経」が伝えます。"},
+  {id:235,cat:"sensory",src:"感覚器 No.61",q:"真皮深層から皮下組織に多く分布し、圧覚・振動覚を感受するのはどれか。",opts:["マイスネル小体","メルケル触覚円板","パチニ小体","ルフィニ小体"],ans:2,exp:"タマネギ状の層板構造をもつ「パチニ小体」は真皮深層〜皮下組織にあり、圧覚や振動覚を感受します。"}
+];
+
+// =========================================================
+// アプリ状態＆ロジック
+// =========================================================
+const STORAGE_KEY = 'anatomy_235_wrong_ids_v1';
+let wrongIds = new Set();
+let activeList = [];
+let idx = 0;
+let correctCnt = 0;
+let sessionWrong = [];
+let answered = false;
+
+window.addEventListener('DOMContentLoaded', () => {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) wrongIds = new Set(JSON.parse(saved));
+  } catch (e) {}
+  updateCounts();
+});
+
+function saveWrong() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([...wrongIds]));
+  } catch (e) {}
+}
+
+function updateCounts() {
+  const nCnt = ALL_QUESTIONS.filter(q => q.cat === 'nervous').length;
+  const sCnt = ALL_QUESTIONS.filter(q => q.cat === 'sensory').length;
+  document.getElementById('totalBadge').textContent = `全${ALL_QUESTIONS.length}問収録`;
+  document.getElementById('cntAll').textContent = `${ALL_QUESTIONS.length}問`;
+  document.getElementById('cntNervous').textContent = `${nCnt}問`;
+  document.getElementById('cntSensory').textContent = `${sCnt}問`;
+  document.getElementById('wrongBadge').textContent = `${wrongIds.size}問`;
+  document.getElementById('reviewWrongBtn').disabled = wrongIds.size === 0;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function clearWrongHistory() {
+  if (wrongIds.size === 0) {
+    showToast('誤答履歴はすでに空です');
+    return;
+  }
+  wrongIds.clear();
+  saveWrong();
+  updateCounts();
+  showToast('間違えた問題の履歴をリセットしました');
+}
+
+function goHome() {
+  updateCounts();
+  document.getElementById('menuScreen').classList.remove('hidden');
+  document.getElementById('quizScreen').classList.add('hidden');
+  document.getElementById('resultScreen').classList.add('hidden');
+  document.getElementById('homeBtn').classList.add('hidden');
+}
+
+function startQuiz(mode, startId = null) {
+  let pool = [];
+  if (mode === 'all') {
+    pool = [...ALL_QUESTIONS];
+  } else if (mode === 'nervous') {
+    pool = ALL_QUESTIONS.filter(q => q.cat === 'nervous');
+  } else if (mode === 'sensory') {
+    pool = ALL_QUESTIONS.filter(q => q.cat === 'sensory');
+  } else if (mode === 'random10') {
+    pool = shuffle(ALL_QUESTIONS).slice(0, 10);
+  } else if (mode === 'random30') {
+    pool = shuffle(ALL_QUESTIONS).slice(0, 30);
+  } else if (mode === 'wrong') {
+    pool = ALL_QUESTIONS.filter(q => wrongIds.has(q.id));
+    if (pool.length === 0) {
+      showToast('間違えた問題はありません！');
+      return;
+    }
+  } else if (mode === 'jump' && startId !== null) {
+    pool = ALL_QUESTIONS.filter(q => q.id >= startId);
+  }
+
+  if (document.getElementById('shuffleQ').checked && mode !== 'random10' && mode !== 'random30' && mode !== 'jump') {
+    pool = shuffle(pool);
+  }
+
+  activeList = pool;
+  idx = 0;
+  correctCnt = 0;
+  sessionWrong = [];
+
+  document.getElementById('menuScreen').classList.add('hidden');
+  document.getElementById('resultScreen').classList.add('hidden');
+  document.getElementById('quizScreen').classList.remove('hidden');
+  document.getElementById('homeBtn').classList.remove('hidden');
+
+  renderQuestion();
+}
+
+function jumpToNumber() {
+  const val = parseInt(document.getElementById('jumpInput').value, 10);
+  if (isNaN(val) || val < 1 || val > ALL_QUESTIONS.length) {
+    showToast(`1〜${ALL_QUESTIONS.length}の番号を入力してください`);
+    return;
+  }
+  startQuiz('jump', val);
+}
+
+function handleSearch() {
+  const kw = document.getElementById('searchInput').value.trim().toLowerCase();
+  const box = document.getElementById('searchResults');
+  if (!kw) {
+    box.classList.add('hidden');
+    box.innerHTML = '';
+    return;
+  }
+  const hits = ALL_QUESTIONS.filter(q =>
+    q.q.toLowerCase().includes(kw) ||
+    q.opts.some(o => o.toLowerCase().includes(kw)) ||
+    q.exp.toLowerCase().includes(kw)
+  );
+  if (hits.length === 0) {
+    box.innerHTML = '<div class="search-item" style="color:#64748b;">該当する問題が見つかりません</div>';
+    box.classList.remove('hidden');
+    return;
+  }
+  box.innerHTML = hits.slice(0, 40).map(q => `
+    <div class="search-item" onclick="startQuiz('jump', ${q.id})">
+      <span class="search-num">No.${q.id}</span>
+      <span>${q.q}</span>
+    </div>
+  `).join('');
+  box.classList.remove('hidden');
+}
+
+function retrySessionWrong() {
+  if (sessionWrong.length === 0) return;
+  activeList = [...sessionWrong];
+  idx = 0;
+  correctCnt = 0;
+  sessionWrong = [];
+  document.getElementById('resultScreen').classList.add('hidden');
+  document.getElementById('quizScreen').classList.remove('hidden');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  answered = false;
+  const q = activeList[idx];
+  const total = activeList.length;
+
+  const badge = document.getElementById('catBadge');
+  if (q.cat === 'nervous') {
+    badge.textContent = '神経系';
+    badge.className = 'cat-badge cat-nervous';
+  } else {
+    badge.textContent = '感覚器';
+    badge.className = 'cat-badge cat-sensory';
+  }
+
+  document.getElementById('progressText').textContent = `第 ${idx + 1} / ${total} 問`;
+  const acc = idx === 0 ? 0 : Math.round((correctCnt / idx) * 100);
+  document.getElementById('accText').textContent = `${acc}%`;
+  document.getElementById('corrText').textContent = correctCnt;
+  document.getElementById('progressBar').style.width = `${(idx / total) * 100}%`;
+
+  document.getElementById('qMeta').textContent = `通し番号 No.${q.id} ／ ${q.src}`;
+  document.getElementById('qText').textContent = q.q;
+
+  // 図解表示
+  const diagBox = document.getElementById('diagramContainer');
+  if (q.diagram && DIAGRAMS[q.diagram]) {
+    diagBox.innerHTML = DIAGRAMS[q.diagram].svg + `<div class="diagram-caption">${DIAGRAMS[q.diagram].caption}</div>`;
+    diagBox.classList.remove('hidden');
+  } else {
+    diagBox.classList.add('hidden');
+    diagBox.innerHTML = '';
+  }
+
+  // 選択肢
+  let optItems = q.opts.map((text, i) => ({ text, ok: i === q.ans }));
+  if (document.getElementById('shuffleOpt').checked) {
+    optItems = shuffle(optItems);
+  }
+
+  const optContainer = document.getElementById('optionsContainer');
+  optContainer.innerHTML = '';
+
+  optItems.forEach((item, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.dataset.ok = item.ok ? '1' : '0';
+    btn.innerHTML = `
+      <span class="opt-num">${i + 1}</span>
+      <span class="opt-label">${item.text}</span>
+      <span class="opt-mark"></span>
+    `;
+    btn.addEventListener('click', () => checkAnswer(btn, item.ok, optItems));
+    optContainer.appendChild(btn);
+  });
+
+  document.getElementById('expCard').classList.add('hidden');
+}
+
+function checkAnswer(selectedBtn, isOk, optItems) {
+  if (answered) return;
+  answered = true;
+
+  const q = activeList[idx];
+  const btns = document.querySelectorAll('#optionsContainer .opt-btn');
+  let corrDispNum = 1;
+  optItems.forEach((it, i) => { if (it.ok) corrDispNum = i + 1; });
+
+  btns.forEach(b => {
+    b.disabled = true;
+    const bOk = b.dataset.ok === '1';
+    const mark = b.querySelector('.opt-mark');
+    if (bOk) {
+      b.classList.add('correct');
+      mark.textContent = '○';
+      mark.style.color = 'var(--green)';
+    } else if (b === selectedBtn && !isOk) {
+      b.classList.add('wrong');
+      mark.textContent = '×';
+      mark.style.color = 'var(--red)';
+    } else {
+      b.classList.add('dimmed');
+    }
+  });
+
+  const expCard = document.getElementById('expCard');
+  const resTag = document.getElementById('resTag');
+
+  if (isOk) {
+    correctCnt++;
+    wrongIds.delete(q.id);
+    expCard.className = 'exp-card is-correct';
+    resTag.textContent = '正解！';
+    resTag.className = 'res-tag ok';
+  } else {
+    wrongIds.add(q.id);
+    sessionWrong.push(q);
+    expCard.className = 'exp-card is-wrong';
+    resTag.textContent = '不正解...';
+    resTag.className = 'res-tag ng';
+  }
+  saveWrong();
+
+  const done = idx + 1;
+  document.getElementById('accText').textContent = `${Math.round((correctCnt / done) * 100)}%`;
+  document.getElementById('corrText').textContent = correctCnt;
+  document.getElementById('progressBar').style.width = `${(done / activeList.length) * 100}%`;
+
+  document.getElementById('corrStr').textContent = `正解：${corrDispNum}. ${q.opts[q.ans]}`;
+  document.getElementById('expBody').textContent = q.exp;
+  document.getElementById('nextBtn').textContent = done >= activeList.length ? '結果を見る ★' : '次の問題へ →';
+  expCard.classList.remove('hidden');
+
+  setTimeout(() => {
+    expCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 60);
+}
+
+function nextQuestion() {
+  idx++;
+  if (idx < activeList.length) {
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  document.getElementById('quizScreen').classList.add('hidden');
+  document.getElementById('resultScreen').classList.remove('hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  const tot = activeList.length;
+  const rate = Math.round((correctCnt / tot) * 100);
+  document.getElementById('finalCorr').textContent = correctCnt;
+  document.getElementById('finalTot').textContent = tot;
+  document.getElementById('finalRate').textContent = rate;
+
+  const msg = document.getElementById('resultMsg');
+  if (rate === 100) msg.textContent = 'パーフェクト！全問正解です！本番も自信を持って臨めます！';
+  else if (rate >= 80) msg.textContent = '素晴らしい成績です！合格ラインをしっかり超えています。';
+  else if (rate >= 60) msg.textContent = 'あと少し！間違えた問題の解説を確認してもう一度解き直しましょう。';
+  else msg.textContent = 'まずは間違えた問題を中心に、解説を読みながら反復しましょう！';
+
+  const retryBtn = document.getElementById('retrySessionBtn');
+  const revCard = document.getElementById('wrongReviewCard');
+  const revList = document.getElementById('wrongReviewList');
+
+  if (sessionWrong.length > 0) {
+    retryBtn.classList.remove('hidden');
+    retryBtn.textContent = `今回間違えた問題だけを解き直す（${sessionWrong.length}問）`;
+    revCard.classList.remove('hidden');
+    revList.innerHTML = sessionWrong.map(q => `
+      <div class="wrong-review-item">
+        <div style="font-weight:800;color:var(--red);margin-bottom:2px;">No.${q.id}（${q.src}）</div>
+        <div style="font-weight:700;margin-bottom:4px;">${q.q}</div>
+        <div style="font-weight:800;color:var(--green);margin-bottom:4px;">正解：${q.opts[q.ans]}</div>
+        <div style="color:#475569;">${q.exp}</div>
+      </div>
+    `).join('');
+  } else {
+    retryBtn.classList.add('hidden');
+    revCard.classList.add('hidden');
+  }
+}
+</script>
+</body>
+</html>
